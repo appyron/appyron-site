@@ -1,6 +1,8 @@
 # Appyron
 > Truck dispatch service for owner-operators and small fleets in the US: load booking, rate negotiation, paperwork, new MC authority support. Contact: +1 346 786 7777, dispatch@appyron.site
 
+Fee: between 5% and 8% of each load's gross, agreed before signing. No setup fees.
+
 ## Pages
 - [How Much Do Truck Dispatchers Charge?](https://appyron.site/how-much-do-truck-dispatchers-charge.html): What truck dispatch services typically charge, how percentage and flat-fee pricing compare, a worked example, and red flags to avoid.
 - [Dispatch Service for New MC Authorities](https://appyron.site/dispatch-service-for-new-mc-authority.html): How a truck dispatch service helps a new MC authority find loads, set up brokers and build a rate history.
