@@ -540,6 +540,22 @@ header,.site-header{background:rgba(255,255,255,.96)!important}
 @media(max-width:400px){.hos-in{grid-template-columns:1fr}}
 .logo-badge img,.logo-mark img{width:auto;max-width:none;object-fit:contain}
 </style>
+<style>
+.hos-adv{margin-top:14px;border:1px solid var(--steel-light);border-radius:12px;padding:12px 14px;background:var(--steel)}
+.hos-adv summary{cursor:pointer;font-weight:600;font-size:.95rem;min-height:28px}
+.hos-in input[type=datetime-local],.hos-in input[type=number],.hos-in select{min-width:0;max-width:100%;min-height:48px;-webkit-appearance:none;appearance:none}
+@media(max-width:760px){
+ #hos-calculator .calc-card{padding:16px!important}
+ .hos-in,.hos-in[style]{grid-template-columns:1fr!important;gap:12px}
+ .hos-in label{font-size:.9rem;margin-bottom:6px}
+ .hos-btn{width:100%;min-height:54px;font-size:1.05rem;margin-top:18px}
+ .hos-out{padding:14px}.hos-out .big{font-size:1.3rem}
+ .hos-out dl{grid-template-columns:1fr 1fr;gap:10px}
+ .tl{max-height:none;overflow:visible}
+ .tl li{grid-template-columns:12px 1fr;padding:12px 0}.tl li>b{grid-column:2;color:var(--orange)}
+ .tlleg{gap:8px 12px}
+}
+</style>
 </head>
 <body class="road-texture">
 
@@ -943,18 +959,22 @@ header,.site-header{background:rgba(255,255,255,.96)!important}
     </div>
     <div class="calc-card">
       <div class="hos-in">
-        <div><label for="h-miles">Total loaded + deadhead miles</label><input type="number" id="h-miles" value="920" min="1"></div>
-        <div><label for="h-speed">Avg moving speed (mph)</label><input type="number" id="h-speed" value="55" min="20" max="75"></div>
+        <div><label for="h-miles">Total loaded + deadhead miles</label><input type="number" id="h-miles" inputmode="decimal" value="920" min="1"></div>
+        <div><label for="h-speed">Avg moving speed (mph)</label><input type="number" id="h-speed" inputmode="decimal" value="55" min="20" max="75"></div>
         <div><label for="h-mode">Driver setup</label><select id="h-mode"><option value="solo">Solo driver</option><option value="team">Team (2 drivers)</option></select></div>
         <div><label for="h-start">Start time (rolling out)</label><input type="datetime-local" id="h-start"></div>
-        <div><label for="h-load">Loading time (hrs)</label><input type="number" id="h-load" value="2" min="0" step="0.25"></div>
-        <div><label for="h-unload">Unloading time (hrs)</label><input type="number" id="h-unload" value="2" min="0" step="0.25"></div>
+        <div><label for="h-load">Loading time (hrs)</label><input type="number" id="h-load" inputmode="decimal" value="2" min="0" step="0.25"></div>
+        <div><label for="h-unload">Unloading time (hrs)</label><input type="number" id="h-unload" inputmode="decimal" value="2" min="0" step="0.25"></div>
         <div><label for="h-appt">Delivery appointment (optional)</label><input type="datetime-local" id="h-appt"></div>
-        <div><label for="h-fuel">Fuel stop (min, every ~600 mi)</label><input type="number" id="h-fuel" value="30" min="0"></div>
-        <div><label for="h-drv">Driving hrs used today (of 11)</label><input type="number" id="h-drv" value="0" min="0" max="11" step="0.25"></div>
-        <div><label for="h-win">14-hr window used (hrs)</label><input type="number" id="h-win" value="0" min="0" max="14" step="0.25"></div>
-        <div><label for="h-cyc">Hrs left in 70-hr cycle</label><input type="number" id="h-cyc" value="70" min="0" max="70" step="0.25"></div>
+        <div><label for="h-fuel">Fuel stop (min, every ~600 mi)</label><input type="number" id="h-fuel" inputmode="decimal" value="30" min="0"></div>
+        </div>
+      <details class="hos-adv"><summary>Already driving today? Enter your clocks (optional)</summary>
+      <div class="hos-in" style="margin-top:12px">
+        <div><label for="h-drv">Driving hrs used today (of 11)</label><input type="number" id="h-drv" inputmode="decimal" value="0" min="0" max="11" step="0.25"></div>
+        <div><label for="h-win">14-hr window used (hrs)</label><input type="number" id="h-win" inputmode="decimal" value="0" min="0" max="14" step="0.25"></div>
+        <div><label for="h-cyc">Hrs left in 70-hr cycle</label><input type="number" id="h-cyc" inputmode="decimal" value="70" min="0" max="70" step="0.25"></div>
       </div>
+      </details>
       <button class="hos-btn" id="h-go" type="button">Calculate my arrival time</button>
       <div class="hos-out" id="h-out" aria-live="polite">Press calculate to see your timeline.</div>
       <p class="calc-note" style="margin-top:10px;">Assumes FMCSA property-carrying rules: 11-hr driving limit, 14-hr window, 30-min break after 8 hrs driving, 10-hr off-duty reset, and the 70-hr/8-day cycle with a 34-hr restart. Team mode assumes about 20 hrs of movement per day. It does not model sleeper-berth splits or the adverse-driving exception. This is a planning estimate, not legal advice. Your ELD is the source of truth.</p>
@@ -1273,7 +1293,7 @@ header,.site-header{background:rgba(255,255,255,.96)!important}
     var li=ev.slice(0,80).map(function(x,i){return '<li style="animation-delay:'+Math.min(i*30,600)+'ms"><span class="d" style="background:'+C[x.k]+'"></span><span><b>'+x.k+'</b> <small>'+x.x+'</small><br><small>'+fd(at(x.s))+' → '+fd(at(x.e))+'</small></span><b>'+hm(x.e-x.s)+'</b></li>'}).join('');
     $('h-out').innerHTML='<div>Estimated arrival</div><div class="big">'+fd(arr)+'</div>'+msg+'<dl><div><dt>Total trip time</dt><dd>'+hm(t)+'</dd></div><div><dt>Driving time</dt><dd>'+hm(dm)+'</dd></div><div><dt>Rest and breaks</dt><dd>'+hm(rest)+'</dd></div><div><dt>Long resets</dt><dd>'+resets+'</dd></div><div><dt>Done unloading</dt><dd>'+fd(done)+'</dd></div></dl><div class="tlbar">'+bar+'</div><div class="tlleg">'+leg+'</div><ul class="tl">'+li+'</ul>';
   }
-  $('h-go').addEventListener('click',calc);
+  $('h-go').addEventListener('click',function(){calc();var o=$('h-out');if(matchMedia('(max-width:760px)').matches&&o.scrollIntoView)o.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'})});
 })();
 </script>
 <script>
