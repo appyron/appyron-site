@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="color-scheme" content="only light">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truck Dispatch Service for Owner-Operators &amp; New MC Authorities | Appyron</title>
+<meta name="description" content="Truck dispatch service for owner-operators and small fleets. Load booking, rate negotiation, paperwork and a dedicated dispatcher. No setup fees.">
+<link rel="canonical" href="https://appyron.site/">
+<meta property="og:title" content="Truck Dispatch Service for Owner-Operators &amp; New MC Authorities | Appyron">
+<meta property="og:description" content="Truck dispatch service for owner-operators and small fleets. Load booking, rate negotiation, paperwork and a dedicated dispatcher. No setup fees.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://appyron.site/og-image.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Appyron truck dispatch service">
+<meta name="twitter:image" content="https://appyron.site/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:site_name" content="Appyron">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#EE4B24">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Truck Dispatch Service | Appyron">
+<meta name="twitter:description" content="Dedicated dispatcher, better rates, zero setup fees. Free rate and HOS calculators.">
+<meta property="og:url" content="https://appyron.site/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt:#FFFFFF;
+    --steel:#F7F6F3;
+    --steel-light:#E6E3DC;
+    --paper:#161616;
+    --paper-dim:#5b5b5b;
+    --orange:#EE4B24;
+    --orange-dim:#c43e1e;
+    --orange-wash:rgba(238,75,36,0.10);
+    --chrome:#6b7280;
+    --radius:4px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--asphalt);
+    color:var(--paper);
+    font-family:'IBM Plex Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Oswald',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    margin:0;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  ul{margin:0;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+
+  .road-texture{
+    background-image:
+      repeating-linear-gradient(90deg, transparent 0 78px, rgba(238,75,36,0.05) 78px 82px),
+      linear-gradient(180deg, var(--asphalt), var(--asphalt));
+  }
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--steel-light);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 24px;max-width:1140px;margin:0 auto;
+  }
+  .logo-mark{display:flex;align-items:center;gap:10px;text-decoration:none;background:#fff;padding:6px 14px;border-radius:8px;transition:transform .2s ease;}
+  .logo-mark img{height:36px;width:auto;display:block;}
+  .logo-mark:hover{transform:scale(1.04);}
+  .nav-links{display:flex;align-items:center;gap:18px;font-size:13px;letter-spacing:0.02em;}
+  .nav-links a{text-decoration:none;color:var(--paper-dim);transition:color .2s;}
+  .nav-links a:hover{color:var(--orange-dim);}
+  .nav-social{display:flex;gap:12px;align-items:center;}
+  .nav-social a{
+    width:32px;height:32px;border-radius:50%;
+    border:1px solid var(--steel-light);
+    display:flex;align-items:center;justify-content:center;
+    transition:border-color .2s, color .2s;color:var(--paper-dim);
+  }
+  .nav-social a:hover{border-color:var(--orange-dim);color:var(--orange-dim);}
+  .nav-cta{
+    background:var(--orange);color:#fff;
+    padding:10px 18px;font-weight:600;font-size:14px;
+    text-decoration:none;border-radius:var(--radius);
+    letter-spacing:0.03em;white-space:nowrap;
+  }
+  .nav-toggle{
+    display:none;background:none;border:1px solid var(--orange-dim);
+    color:var(--orange-dim);width:40px;height:40px;border-radius:var(--radius);
+    font-size:18px;cursor:pointer;
+  }
+  .mobile-menu{display:none;}
+  .mobile-menu.open{
+    display:flex;flex-direction:column;gap:2px;
+    padding:8px 24px 20px;border-bottom:1px solid var(--steel-light);
+    background:var(--steel);
+  }
+  .mobile-menu a{
+    padding:12px 4px;color:var(--paper-dim);text-decoration:none;
+    border-bottom:1px solid var(--steel-light);font-size:15px;
+  }
+  .mobile-menu a:last-child{border-bottom:none;}
+
+  /* HERO */
+  .hero{padding:72px 0 0;position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;padding-bottom:56px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;
+    letter-spacing:0.15em;color:var(--orange-dim);
+    border:1px solid var(--orange-dim);
+    padding:5px 10px;border-radius:var(--radius);
+    margin-bottom:22px;
+  }
+  .eyebrow::before{content:"●";font-size:8px;}
+  h1.hero-title{font-size:clamp(36px,5vw,60px);line-height:1.05;font-weight:600;margin-bottom:22px;}
+  h1.hero-title em{font-style:normal;color:var(--orange);}
+  .hero-sub{font-size:18px;line-height:1.6;color:var(--paper-dim);max-width:46ch;margin-bottom:34px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--orange);color:#fff;padding:15px 26px;font-weight:600;font-size:15px;
+    text-decoration:none;border-radius:var(--radius);letter-spacing:0.02em;
+    transition:transform .15s ease;display:inline-block;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--orange-dim);color:var(--paper);padding:15px 26px;font-weight:500;font-size:15px;text-decoration:none;border-radius:var(--radius);}
+  .btn-ghost:hover{border-color:var(--orange);color:var(--orange-dim);}
+
+  .ticket{background:var(--steel);color:var(--paper);border:1px solid var(--steel-light);border-radius:8px;position:relative;box-shadow:0 30px 60px -20px rgba(0,0,0,0.18);transform:rotate(1.5deg);}
+  .ticket-inner{padding:26px 26px 22px;}
+  .ticket-top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px dashed var(--orange-dim);padding-bottom:14px;margin-bottom:16px;}
+  .ticket-top .tt-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--paper-dim);}
+  .ticket-top .tt-num{font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;}
+  .ticket-field{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--steel-light);font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  .ticket-field span:first-child{color:var(--paper-dim);}
+  .ticket-field span:last-child{font-weight:500;}
+  .stamp{position:absolute;right:18px;bottom:22px;border:3px solid var(--orange);color:var(--orange);font-family:'Oswald',sans-serif;font-weight:700;font-size:15px;letter-spacing:0.08em;padding:6px 12px;border-radius:4px;transform:rotate(-8deg);opacity:0.9;}
+  .ticket-notch{position:absolute;top:50%;width:22px;height:22px;background:var(--asphalt);border-radius:50%;transform:translateY(-50%);}
+  .ticket-notch.left{left:-11px;}
+  .ticket-notch.right{right:-11px;}
+
+  /* MOVING TRUCK STRIP */
+  .truck-strip{
+    position:relative;height:64px;background:var(--steel);
+    border-top:1px solid var(--steel-light);border-bottom:1px solid var(--steel-light);
+    overflow:hidden;
+  }
+  .truck-strip .dashes{
+    position:absolute;left:0;right:0;top:50%;height:2px;transform:translateY(-50%);
+    background:repeating-linear-gradient(90deg, rgba(0,0,0,0.16) 0 24px, transparent 24px 44px);
+  }
+  .truck-svg{position:absolute;top:50%;left:-160px;transform:translateY(-50%);animation:drive 11s linear infinite;}
+  @keyframes drive{
+    from{left:-160px;}
+    to{left:110%;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .truck-svg{animation:none;left:40%;}
+  }
+
+  /* STAT STRIP */
+  .stat-strip{background:var(--steel);border-bottom:1px solid var(--steel-light);padding:34px 0;}
+  .stat-strip .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;}
+  .stat{flex:1;min-width:150px;text-align:center;border-left:1px solid var(--steel-light);padding:0 16px;}
+  .stat:first-child{border-left:none;}
+  .stat .num{font-family:'Oswald',sans-serif;font-weight:600;font-size:34px;color:var(--orange);}
+  .stat .lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--paper-dim);text-transform:uppercase;margin-top:4px;}
+
+  .section{padding:88px 0;}
+  .section-head{max-width:640px;margin-bottom:52px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.15em;color:var(--orange-dim);margin-bottom:10px;display:block;}
+  .section h2{font-size:clamp(28px,3.6vw,40px);line-height:1.1;margin-bottom:14px;}
+  .section-desc{color:var(--paper-dim);font-size:16px;line-height:1.6;max-width:56ch;}
+  .section-head.center .section-desc{margin-left:auto;margin-right:auto;}
+
+  /* ROUTE / SERVICES */
+  .route{position:relative;}
+  .route-line{position:absolute;left:27px;top:14px;bottom:14px;width:2px;background:repeating-linear-gradient(180deg,var(--chrome) 0 10px,transparent 10px 20px);}
+  .stop{display:grid;grid-template-columns:56px 1fr;gap:24px;padding-bottom:48px;position:relative;}
+  .stop:last-child{padding-bottom:0;}
+  .stop-marker{width:56px;height:56px;border-radius:50%;background:var(--steel);border:2px solid var(--orange);display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:600;color:var(--orange);font-size:18px;z-index:2;}
+  .stop h3{font-size:21px;margin-bottom:8px;color:var(--paper);}
+  .stop p{color:var(--paper-dim);font-size:15px;line-height:1.6;margin:0;max-width:60ch;}
+
+  /* WHY APPYRON — feature cards */
+  .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .feature-card{background:var(--steel);border:1px solid var(--steel-light);border-radius:10px;padding:26px 22px;}
+  .feature-icon{width:46px;height:46px;border-radius:8px;background:var(--orange-wash);display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--orange);}
+  .feature-card h3{font-family:'IBM Plex Sans',sans-serif;text-transform:none;letter-spacing:0;font-size:17px;font-weight:600;margin-bottom:8px;color:var(--paper);}
+  .feature-card p{color:var(--paper-dim);font-size:14px;line-height:1.6;margin:0;}
+
+  /* TRUST */
+  .trust{background:var(--steel);border-radius:8px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  .trust-copy p{color:var(--paper-dim);font-size:16px;line-height:1.7;margin-bottom:16px;}
+  .trust-copy p:last-child{margin-bottom:0;}
+  .trust-quote{font-family:'Oswald',sans-serif;font-size:24px;line-height:1.35;color:var(--paper);margin-bottom:20px;}
+  .trust-sig{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--orange-dim);}
+
+  /* CB LOG TESTIMONIALS */
+  .log{background:var(--asphalt);border:1px solid var(--steel-light);border-radius:6px;overflow:hidden;}
+  .log-header{background:var(--steel);padding:14px 20px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;color:var(--chrome);display:flex;justify-content:space-between;border-bottom:1px solid var(--steel-light);}
+  .log-entry{padding:20px;border-bottom:1px solid var(--steel-light);display:grid;grid-template-columns:130px 1fr;gap:20px;}
+  .log-entry:last-child{border-bottom:none;}
+  .log-time{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--orange-dim);}
+  .log-handle{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--chrome);margin-top:4px;}
+  .log-msg{font-size:15px;line-height:1.6;color:var(--paper);}
+  .log-msg .role{color:var(--paper-dim);font-size:13px;display:block;margin-top:6px;}
+
+  /* RPM / COST PER MILE CALCULATOR */
+  .calc-card{background:var(--steel);border:1px solid var(--steel-light);border-radius:14px;padding:32px;}
+  .calc-tabs{display:flex;gap:8px;margin-bottom:24px;}
+  .calc-tab{flex:1;text-align:center;padding:12px;border-radius:8px;border:1px solid var(--steel-light);background:#fff;font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.03em;color:var(--paper-dim);cursor:default;}
+  .calc-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:34px;align-items:start;}
+  .calc-group{margin-bottom:22px;}
+  .calc-group-title{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--orange-dim);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .calc-group-title .n{width:20px;height:20px;border-radius:50%;background:var(--orange);color:#fff;font-size:11px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;}
+  .calc-inputs .form-field{margin-bottom:12px;}
+  .calc-inputs .form-row{margin-bottom:0;}
+  .calc-cost-row{display:grid;grid-template-columns:1fr 110px;gap:10px;align-items:center;margin-bottom:10px;}
+  .calc-cost-row label{font-size:13px;color:var(--paper-dim);}
+  .calc-cost-row input{background:#fff;border:1px solid var(--steel-light);border-radius:6px;padding:9px 10px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper);text-align:right;width:100%;}
+  .calc-cost-row input:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-wash);}
+  .calc-cost-row.readonly input{background:var(--steel);color:var(--paper-dim);}
+  .calc-cost-total{display:flex;justify-content:space-between;padding-top:12px;margin-top:4px;border-top:1px dashed var(--steel-light);font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--paper);font-weight:600;}
+  .calc-advanced-toggle{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--orange-dim);cursor:pointer;
+    display:flex;align-items:center;gap:6px;margin:4px 0 16px;letter-spacing:0.03em;user-select:none;
+  }
+  .calc-advanced{display:none;}
+  .calc-advanced.open{display:block;}
+  .calc-results{background:var(--paper);border-radius:12px;padding:28px;color:#fff;position:sticky;top:90px;}
+  .calc-verdict{
+    display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;
+    font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.03em;margin-bottom:20px;
+  }
+  .calc-verdict.good{background:rgba(22,163,74,0.18);color:#4ade80;}
+  .calc-verdict.marginal{background:rgba(245,194,75,0.18);color:#f5c24b;}
+  .calc-verdict.bad{background:rgba(238,75,36,0.2);color:#ff8a65;}
+  .calc-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;}
+  .calc-hero-box{background:rgba(255,255,255,0.05);border-radius:10px;padding:14px 16px;}
+  .calc-hero-box .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:0.05em;font-family:'IBM Plex Mono',monospace;color:rgba(245,243,238,0.55);display:block;margin-bottom:6px;}
+  .calc-hero-box .val{font-family:'Oswald',sans-serif;font-size:26px;font-weight:600;color:#fff;}
+  .calc-hero-box.profit .val{color:var(--orange);}
+  .calc-bar-wrap{margin:4px 0 22px;}
+  .calc-bar{display:flex;height:14px;border-radius:7px;overflow:hidden;background:rgba(255,255,255,0.08);}
+  .calc-bar .cost-seg{background:#ff8a65;}
+  .calc-bar .profit-seg{background:var(--orange);}
+  .calc-bar-legend{display:flex;justify-content:space-between;margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:rgba(245,243,238,0.6);}
+  .calc-bar-legend span.cost{color:#ff8a65;}
+  .calc-bar-legend span.profit{color:var(--orange);}
+  .calc-stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .calc-stat-row:last-child{border-bottom:none;}
+  .calc-stat-row .lbl{font-size:12.5px;color:rgba(245,243,238,0.65);}
+  .calc-stat-row .val{font-family:'Oswald',sans-serif;font-size:15.5px;font-weight:600;color:#fff;}
+  .calc-note{font-size:11.5px;color:var(--chrome);margin-top:16px;font-family:'IBM Plex Mono',monospace;line-height:1.6;}
+  @media (max-width:860px){
+    .calc-grid{grid-template-columns:1fr;}
+    .calc-results{position:static;}
+    .calc-hero-grid{grid-template-columns:1fr 1fr;}
+  }
+  /* FAQ */
+  .faq-list{display:flex;flex-direction:column;gap:12px;}
+  .faq-item{background:var(--steel);border:1px solid var(--steel-light);border-radius:10px;overflow:hidden;}
+  .faq-item summary{
+    list-style:none;cursor:pointer;padding:20px 22px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-weight:600;font-size:15.5px;color:var(--paper);
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item .chev{transition:transform .2s ease;color:var(--orange-dim);font-size:14px;flex-shrink:0;margin-left:16px;}
+  .faq-item[open] .chev{transform:rotate(180deg);}
+  .faq-item .faq-a{padding:0 22px 20px;color:var(--paper-dim);font-size:14.5px;line-height:1.65;}
+
+  /* HOURS + CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .info-card{background:var(--steel);border:1px solid var(--steel-light);border-radius:10px;padding:28px;}
+  .info-card h3{font-family:'IBM Plex Sans',sans-serif;text-transform:none;letter-spacing:0;font-size:16px;font-weight:600;margin-bottom:16px;color:var(--paper);}
+  .hours-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--steel-light);font-size:14px;}
+  .hours-row:last-child{border-bottom:none;}
+  .hours-row span:first-child{color:var(--paper-dim);}
+  .hours-row span:last-child{font-family:'IBM Plex Mono',monospace;color:var(--paper);text-align:right;}
+  .hours-row.emergency span:last-child{color:var(--orange-dim);}
+  .social-row{display:flex;gap:12px;margin-top:18px;}
+  .social-row a{
+    display:flex;align-items:center;gap:8px;padding:10px 14px;
+    border:1px solid var(--steel-light);border-radius:var(--radius);
+    font-size:13px;color:var(--paper-dim);text-decoration:none;transition:border-color .2s,color .2s;
+  }
+  .social-row a:hover{border-color:var(--orange-dim);color:var(--orange-dim);}
+
+  /* CONTACT FORM */
+  .contact-form{background:var(--steel);border:1px solid var(--steel-light);border-radius:10px;padding:28px;margin-top:24px;}
+  .contact-form h3{font-family:'IBM Plex Sans',sans-serif;text-transform:none;letter-spacing:0;font-size:16px;font-weight:600;margin-bottom:18px;color:var(--paper);}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .form-field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+  .form-field label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--paper-dim);text-transform:uppercase;}
+  .form-field input, .form-field textarea{
+    background:#fff;border:1px solid var(--steel-light);border-radius:6px;padding:12px 14px;
+    font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:var(--paper);width:100%;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .form-field input:focus, .form-field textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px var(--orange-wash);}
+  .form-field textarea{resize:vertical;min-height:110px;font-family:'IBM Plex Sans',sans-serif;}
+  .form-honeypot{position:absolute;left:-9999px;opacity:0;}
+  .form-note{font-size:12px;color:var(--chrome);margin-top:14px;font-family:'IBM Plex Mono',monospace;}
+  .form-status{margin-top:14px;font-size:14px;font-weight:500;display:none;}
+  .form-status.show{display:block;}
+  .form-status.success{color:#16a34a;}
+  .form-status.error{color:var(--orange-dim);}
+  @media (max-width:640px){.form-row{grid-template-columns:1fr;}}
+
+  /* CLOSING CTA */
+  .cta-band{background:linear-gradient(120deg,var(--orange),var(--orange-dim));color:#fff;padding:64px 0;text-align:center;}
+  .cta-band h2{font-size:clamp(26px,3.4vw,38px);margin-bottom:14px;}
+  .cta-band p{font-size:16px;margin-bottom:28px;opacity:0.9;}
+  .btn-dark{background:var(--asphalt);color:var(--paper);padding:16px 30px;font-weight:600;font-size:15px;text-decoration:none;border-radius:var(--radius);display:inline-block;}
+
+  /* FOOTER */
+  footer{background:var(--steel);border-top:3px solid var(--orange);padding:48px 0 28px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:36px;}
+  .foot-brand .logo-badge{display:inline-block;background:#fff;padding:8px 16px;border-radius:8px;margin-bottom:14px;}
+  .foot-brand .logo-badge img{height:28px;display:block;}
+  .foot-brand p{color:var(--paper-dim);font-size:14px;line-height:1.6;max-width:36ch;}
+  footer h4{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.1em;color:var(--chrome);margin-bottom:14px;text-transform:uppercase;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  footer li{margin-bottom:10px;font-size:14px;}
+  footer a{text-decoration:none;color:var(--paper-dim);}
+  footer a:hover{color:var(--orange);}
+  .foot-bottom{border-top:1px solid var(--steel-light);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--chrome);}
+
+  /* HOVER ANIMATIONS — boxes react when the truck cursor passes over them */
+  .feature-card{transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;}
+  .feature-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 18px 34px -14px rgba(238,75,36,0.4);border-color:var(--orange);}
+  .feature-icon{transition:transform .25s ease, background .25s ease;}
+  .feature-card:hover .feature-icon{transform:scale(1.12) rotate(-4deg);background:var(--orange);color:#fff;}
+
+  .stop-marker{transition:transform .25s ease, background .25s ease, box-shadow .25s ease;}
+  .stop:hover .stop-marker{background:var(--orange);color:#111;transform:scale(1.15);box-shadow:0 0 0 8px var(--orange-wash);}
+  .stop:hover h3{color:var(--orange);}
+  .stop h3{transition:color .2s ease;}
+
+  .info-card{transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;}
+  .info-card:hover{transform:translateY(-5px);border-color:var(--orange);box-shadow:0 18px 32px -16px rgba(238,75,36,0.35);}
+
+  .faq-item{transition:border-color .2s ease, box-shadow .2s ease;}
+  .faq-item:hover{border-color:var(--orange);box-shadow:0 10px 24px -16px rgba(238,75,36,0.4);}
+
+  .log-entry{transition:background .2s ease;}
+  .log-entry:hover{background:rgba(238,75,36,0.06);}
+
+  .stat{transition:transform .2s ease;cursor:default;}
+  .stat:hover{transform:scale(1.08);}
+  .stat .num{transition:text-shadow .2s ease, color .2s ease;}
+  .stat:hover .num{color:#fff;text-shadow:0 0 16px var(--orange);}
+
+  .ticket{transition:transform .3s ease, box-shadow .3s ease;}
+  .ticket:hover{transform:rotate(0deg) scale(1.02);box-shadow:0 36px 70px -20px rgba(238,75,36,0.35);}
+
+  /* RESPONSIVE */
+  @media (max-width:1120px){
+    .nav-links{display:none;}
+    .nav-toggle{display:block;}
+  }
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .nav-toggle{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .ticket{transform:none;max-width:420px;margin:0 auto;}
+    .trust{grid-template-columns:1fr;padding:36px 24px;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .foot-brand{grid-column:1 / -1;}
+    .log-entry{grid-template-columns:1fr;gap:6px;}
+    .feature-grid{grid-template-columns:1fr 1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:520px){
+    .stat-strip .wrap{gap:20px 12px;}
+    .stat{min-width:42%;border-left:none;}
+    .foot-grid{grid-template-columns:1fr;}
+    .feature-grid{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .btn-primary{transition:none;}
+  }
+
+  :focus-visible{outline:2px solid var(--orange);outline-offset:2px;}
+</style>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "Appyron", "url": "https://appyron.site/", "email": "dispatch@appyron.site", "telephone": "+1-346-786-7777", "areaServed": "US", "sameAs": ["https://www.linkedin.com/company/appyron/", "https://www.instagram.com/appyron/"], "description": "Truck dispatching, load booking and freight solutions for owner-operators and small fleets.", "contactPoint": {"@type": "ContactPoint", "telephone": "+1-346-786-7777", "email": "dispatch@appyron.site", "contactType": "sales", "availableLanguage": "English"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much do you charge?", "acceptedAnswer": {"@type": "Answer", "text": "Our dispatch fee is a flat percentage of each load's gross, agreed before you sign on — no setup fees and no charges on loads we don't book for you."}}, {"@type": "Question", "name": "What truck types do you dispatch?", "acceptedAnswer": {"@type": "Answer", "text": "Dry van, reefer, flatbed, and power-only. Let us know your equipment and preferred lanes and we'll match freight accordingly."}}, {"@type": "Question", "name": "Is there a forced-dispatch policy?", "acceptedAnswer": {"@type": "Answer", "text": "No. You approve every load before we book it. It's your truck, so you set the lanes, the rate floor and your home time. We bring strong options and negotiate hard."}}, {"@type": "Question", "name": "How fast can I start running?", "acceptedAnswer": {"@type": "Answer", "text": "Most carriers are onboarded and booking their first load within 24–48 hours of signing up, once paperwork and carrier packets are in."}}, {"@type": "Question", "name": "Do you work with owner-operators?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — owner-operators are most of who we work with, alongside small fleets running a handful of trucks."}}, {"@type": "Question", "name": "Can non-US based drivers use the service?", "acceptedAnswer": {"@type": "Answer", "text": "We dispatch carriers authorized to operate in the US, regardless of where you're based, as long as your authority and insurance are current."}}, {"@type": "Question", "name": "Do you dispatch new MC authorities?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. New authorities are welcome. We help with carrier packets and broker setup so you can start booking loads."}}, {"@type": "Question", "name": "What does a truck dispatcher do?", "acceptedAnswer": {"@type": "Answer", "text": "A dispatcher finds and books freight, negotiates rates with brokers, handles rate confirmations and paperwork, and plans routes around your hours of service so you can focus on driving."}}, {"@type": "Question", "name": "What documents do I need to start?", "acceptedAnswer": {"@type": "Answer", "text": "Your MC/DOT authority, certificate of insurance, W-9 and a voided check or factoring details. We'll walk you through the rest."}}, {"@type": "Question", "name": "What is the average truck dispatcher fee?", "acceptedAnswer": {"@type": "Answer", "text": "Many services charge between 5% and 10% of each load's gross revenue. Flat weekly or monthly fees are also common."}}, {"@type": "Question", "name": "Is a flat fee or a percentage better?", "acceptedAnswer": {"@type": "Answer", "text": "A percentage scales with your revenue and aligns the dispatcher's income with yours. A flat fee can be cheaper for high-grossing trucks. Compare what each includes."}}, {"@type": "Question", "name": "Should I pay a setup fee to a dispatcher?", "acceptedAnswer": {"@type": "Answer", "text": "Be cautious. Many reputable services charge no setup fee and only get paid when you get paid."}}]}]</script>
+<style>
+.hos-out{margin-top:18px;border:1px solid var(--steel-light);background:var(--steel);border-radius:var(--radius);padding:18px}
+.hos-out .big{font-size:1.5rem;font-weight:800;color:var(--orange)}
+.hos-out dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0 0}
+.hos-out dt{font-size:.75rem;color:var(--paper-dim);text-transform:uppercase;letter-spacing:.06em}.hos-out dd{margin:2px 0 0;font-weight:700}
+.hos-btn{margin-top:14px;background:var(--orange);color:#fff;border:0;border-radius:var(--radius);padding:12px 20px;font-weight:700;cursor:pointer}
+.hos-in{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.hos-in label{display:block;font-size:.8rem;color:var(--paper-dim);margin-bottom:4px}.hos-in input,.hos-in select{width:100%;padding:10px;border:1px solid var(--steel-light);border-radius:var(--radius);background:#fff;font:inherit}
+.equip{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:#161616}
+.callbar a{flex:1;text-align:center;padding:12px;border-radius:var(--radius);font-weight:700;text-decoration:none;color:#fff;background:var(--orange)}.callbar a+a{background:#fff;color:#161616}
+@media(max-width:760px){.callbar{display:flex}body{padding-bottom:70px}}
+</style>
+<style>
+html{scroll-padding-top:84px}
+header,.site-header{background:rgba(255,255,255,.96)!important}
+.hero h1{font-size:clamp(2.6rem,7vw,5.2rem);letter-spacing:-.035em;line-height:1.02}
+.btn-primary,.btn-dark,.hos-btn{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.btn-primary:hover,.btn-dark:hover,.hos-btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 12px 28px rgba(238,75,36,.28)}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+#progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--orange);z-index:100;transform:scaleX(0);transform-origin:left;will-change:transform}
+.tlbar{display:flex;height:16px;border-radius:99px;overflow:hidden;margin:16px 0 8px;background:var(--steel-light)}
+.tlbar i{display:block;height:100%;transform-origin:left;animation:grow .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}}
+.tlleg{display:flex;flex-wrap:wrap;gap:12px;font-size:.78rem;color:var(--paper-dim);margin-bottom:12px}
+.tlleg b{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.tl{list-style:none;margin:0;padding:0;max-height:420px;overflow:auto}
+.tl li{display:grid;grid-template-columns:12px 1fr auto;gap:12px;align-items:center;padding:9px 0;border-top:1px solid var(--steel-light);font-size:.9rem;animation:fade .5s both}
+.tl li span.d{width:12px;height:12px;border-radius:50%}.tl small{color:var(--paper-dim)}
+@keyframes fade{from{opacity:0;transform:translateX(-8px)}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.tlbar i,.tl li{animation:none}}
+</style>
+<style>
+.scene{background:#2d343a;line-height:0;overflow:hidden}.scene svg{width:100%;height:auto;max-height:520px;display:block}
+.scene .stk{animation:stk 14s linear infinite}@keyframes stk{from{transform:translateX(-260px)}to{transform:translateX(1060px)}}
+.scene .dash{animation:dsh 1.2s linear infinite}@keyframes dsh{to{stroke-dashoffset:-48}}
+.scene .ln{animation:lnd 4s ease-in-out infinite}@keyframes lnd{0%{stroke-dashoffset:120}60%,100%{stroke-dashoffset:0}}
+.scene .hand{animation:hnd 8s linear infinite}@keyframes hnd{to{transform:rotate(360deg)}}
+.scene .bk{animation:bk 3s steps(2) infinite}.scene .b2{animation-delay:1.2s}@keyframes bk{50%{fill:#EE4B24}}
+.eq-ico{display:block;margin-bottom:12px;animation:bob 2.6s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-3px)}}
+.equip .info-card:hover .eq-ico{animation-duration:.8s}
+@media(prefers-reduced-motion:reduce){.scene .stk{animation:none;transform:translateX(480px)}.scene .dash,.scene .ln,.scene .hand,.scene .bk,.eq-ico{animation:none}}
+</style>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Service", "serviceType": "Truck dispatching", "name": "Truck dispatch service", "provider": {"@type": "Organization", "name": "Appyron", "telephone": "+1-346-786-7777", "url": "https://appyron.site/"}, "areaServed": "US", "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Dispatch by equipment", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Dry van dispatch"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Reefer dispatch"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Flatbed and step deck dispatch"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Power-only dispatch"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Box truck and hotshot dispatch"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "New MC authority dispatch"}}]}}]</script>
+<style>
+  .scene-sec{position:relative;overflow:hidden;padding:72px 0 0;background:linear-gradient(180deg,#fff 0,#DCE9F2 220px,#DCE9F2 100%);}
+  .scene-head{padding-bottom:16px;}
+  .scene-head h2{font-size:clamp(28px,3.6vw,40px);line-height:1.1;margin-bottom:12px;max-width:20ch;}
+  .scene-head .section-desc{max-width:52ch;margin:0;}
+  .scene{display:block;width:100%;max-width:1400px;height:auto;margin:0 auto;overflow:visible;}
+  .scene text{font-family:'Oswald',sans-serif;}
+  .scene .mono{font-family:'IBM Plex Mono',monospace;}
+  .sc-truck{transform:translateX(140px);animation:sc-drive 22s infinite backwards;}
+  .sc-wh{transform-box:fill-box;transform-origin:50% 50%;animation:sc-spin 22s infinite backwards;}
+  .sc-line{stroke-dasharray:100;stroke-dashoffset:0;animation:sc-line 22s infinite backwards;}
+  .sc-tk{transform-box:fill-box;transform-origin:50% 100%;animation:sc-tk 22s infinite backwards;}
+  .sc-tb{animation:sc-load 22s infinite backwards;animation-delay:calc(var(--i)*.44s);}
+  .sc-sb{opacity:0;animation:sc-unload 22s infinite backwards;animation-delay:calc(var(--i)*.44s);}
+  .sc-dv{opacity:0;transform-box:fill-box;transform-origin:50% 100%;animation:sc-dv 22s infinite backwards;}
+  .sc-pp{transform:translateY(18px);animation:sc-paper 22s infinite backwards;}
+  .sc-cb{animation:sc-belt 6s linear infinite backwards;}
+  .sc-flow{stroke-dasharray:7 6;animation:sc-flow 1.2s linear infinite;}
+  @keyframes sc-drive{
+    0%{transform:translateX(-620px);animation-timing-function:cubic-bezier(.15,.6,.3,1)}
+    22%{transform:translateX(140px)}
+    42%{transform:translateX(140px);animation-timing-function:ease-in-out}
+    57%{transform:translateX(600px)}
+    77%{transform:translateX(600px);animation-timing-function:cubic-bezier(.5,0,.9,.6)}
+    96%,100%{transform:translateX(1500px)}
+  }
+  @keyframes sc-spin{
+    0%{transform:rotate(0deg);animation-timing-function:cubic-bezier(.15,.6,.3,1)}
+    22%{transform:rotate(3344deg)}
+    42%{transform:rotate(3344deg);animation-timing-function:ease-in-out}
+    57%{transform:rotate(5368deg)}
+    77%{transform:rotate(5368deg);animation-timing-function:cubic-bezier(.5,0,.9,.6)}
+    96%,100%{transform:rotate(9328deg)}
+  }
+  @keyframes sc-line{
+    0%,23%{stroke-dashoffset:100;opacity:1}
+    27%,40%{stroke-dashoffset:0;opacity:1}
+    42%,100%{stroke-dashoffset:0;opacity:0}
+  }
+  @keyframes sc-tk{
+    0%,26%{opacity:0;transform:scale(.2)}
+    28.5%{opacity:1;transform:scale(1.07)}
+    30%,40%{opacity:1;transform:scale(1)}
+    42%,100%{opacity:0;transform:scale(.96)}
+  }
+  @keyframes sc-load{
+    0%,29%{opacity:0;transform:translateY(-16px)}
+    31%,61%{opacity:1;transform:none}
+    63%,100%{opacity:0;transform:translateX(26px)}
+  }
+  @keyframes sc-unload{
+    0%,61.5%{opacity:0;transform:translateX(-26px)}
+    63.5%,94%{opacity:1;transform:none}
+    97%,100%{opacity:0;transform:none}
+  }
+  @keyframes sc-dv{
+    0%,67.5%{opacity:0;transform:scale(.2)}
+    69%{opacity:1;transform:scale(1.08)}
+    70.5%,76%{opacity:1;transform:scale(1)}
+    78%,100%{opacity:0;transform:scale(.96)}
+  }
+  @keyframes sc-paper{
+    0%,70%{transform:translateY(18px)}
+    73%,94%{transform:translateY(0)}
+    97%,100%{transform:translateY(18px)}
+  }
+  @keyframes sc-belt{
+    0%{opacity:0;transform:translateX(0)}
+    8%,88%{opacity:1}
+    100%{opacity:0;transform:translateX(100px)}
+  }
+  @keyframes sc-flow{to{stroke-dashoffset:-26}}
+  .scene.is-paused *{animation-play-state:paused !important;}
+  @media (max-width:720px){
+    .scene{width:150%;max-width:none;margin-left:-25%;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .scene *{animation:none !important;}
+  }
+
+.equip{grid-template-columns:repeat(3,1fr)!important}
+@media(max-width:900px){.equip{grid-template-columns:repeat(2,1fr)!important}}
+@media(max-width:560px){.equip{grid-template-columns:1fr!important}}
+.info-card{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.info-card:hover{transform:translateY(-8px);border-color:var(--orange);box-shadow:0 18px 50px rgba(238,75,36,.18)}
+@media(prefers-reduced-motion:reduce){.hero::before{animation:none}}
+</style>
+<style>
+:root{color-scheme:only light}html{-webkit-text-size-adjust:100%}
+.hos-in input,.hos-in select{color:var(--paper);background:var(--asphalt)}
+@media(max-width:760px){input,select,textarea{font-size:16px!important}.btn-primary,.btn-dark,.hos-btn,.nav-cta{min-height:44px}.hos-in{grid-template-columns:1fr 1fr}.tl li{grid-template-columns:12px 1fr}.tl li>b{grid-column:2}}
+@media(max-width:400px){.hos-in{grid-template-columns:1fr}}
+.logo-badge img,.logo-mark img{width:auto;max-width:none;object-fit:contain}
+</style>
+</head>
+<body class="road-texture">
+
+<header>
+  <nav>
+    <a href="#top" class="logo-mark"><img src="data:image/webp;base64,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" alt="Appyron — truck dispatching, load booking, freight solutions"></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#why">Why Appyron</a>
+      <a href="#calculator">RPM Calc</a>
+      <a href="#hos-calculator">HOS Calc</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <div class="nav-social">
+        <a href="https://www.linkedin.com/company/appyron/" target="_blank" rel="noopener" aria-label="Appyron on LinkedIn">in</a>
+        <a href="https://www.instagram.com/appyron/" target="_blank" rel="noopener" aria-label="Appyron on Instagram">ig</a>
+      </div>
+    </div>
+    <a href="#contact" class="nav-cta">Talk to dispatch</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services">Services</a>
+    <a href="#why">Why Appyron</a>
+    <a href="#calculator">RPM Calc</a>
+    <a href="#hos-calculator">HOS Calc</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.linkedin.com/company/appyron/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/appyron/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Truck Dispatching · Load Booking · Freight Solutions</span>
+      <h1 class="hero-title">Truck dispatch service that keeps <em>the wheels turning.</em></h1>
+      <p class="hero-sub">Appyron books your loads, negotiates your rates, and handles the paperwork — so you're driving more miles and doing less faxing at a truck stop.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Talk to a real dispatcher</a>
+        <a href="#services" class="btn-ghost">See how it works</a>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-notch left"></div>
+      <div class="ticket-notch right"></div>
+      <div class="ticket-inner">
+        <div class="ticket-top">
+          <div>
+            <div class="tt-label">RATE CONFIRMATION</div>
+            <div class="tt-num">#AY-10482</div>
+          </div>
+          <div class="tt-label" style="text-align:right;">STATUS<br><strong style="color:#16a34a;">CONFIRMED</strong></div>
+        </div>
+        <div class="ticket-field"><span>CARRIER</span><span>Your Fleet, LLC</span></div>
+        <div class="ticket-field"><span>ORIGIN → DEST</span><span>Chicago, IL → Dallas, TX</span></div>
+        <div class="ticket-field"><span>RATE</span><span>$2,450 (all-in)</span></div>
+        <div class="ticket-field"><span>DISPATCHED BY</span><span>Appyron Ops</span></div>
+        <div class="ticket-field" style="border-bottom:none;"><span>PICKUP</span><span>Today, 2:00 PM</span></div>
+      </div>
+      <div class="stamp">BOOKED</div>
+    </div>
+  </div>
+
+  <div class="truck-strip" aria-hidden="true">
+    <div class="dashes"></div>
+    <svg class="truck-svg" width="120" height="44" viewBox="0 0 120 44" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="14" width="62" height="20" rx="2" fill="#EE4B24"/>
+      <path d="M64 14H92C95 14 97 16 98 19L104 30H64V14Z" fill="#FFFFFF" stroke="#EE4B24" stroke-width="1.5"/>
+      <rect x="70" y="19" width="16" height="10" rx="1" fill="#F0DED6" opacity="0.9"/>
+      <circle cx="20" cy="36" r="6.5" fill="#111" stroke="#8A8F98" stroke-width="1.5"/>
+      <circle cx="46" cy="36" r="6.5" fill="#111" stroke="#8A8F98" stroke-width="1.5"/>
+      <circle cx="90" cy="36" r="6.5" fill="#111" stroke="#8A8F98" stroke-width="1.5"/>
+      <rect x="2" y="14" width="62" height="6" fill="#c43e1e"/>
+    </svg>
+  </div>
+</section>
+
+<div class="stat-strip">
+  <div class="wrap">
+    <div class="stat"><div class="num">24–48h</div><div class="lbl">Typical onboarding</div></div>
+    <div class="stat"><div class="num">$0</div><div class="lbl">Setup fees</div></div>
+    <div class="stat"><div class="num">24/7</div><div class="lbl">Dispatch line</div></div>
+    <div class="stat"><div class="num">100%</div><div class="lbl">Your call: you approve every load before we book it</div></div>
+  </div>
+</div>
+
+<section class="section route" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">The route</span>
+      <h2>Four stops between you and a full week of miles.</h2>
+      <p class="section-desc">No bloated software to learn. Just a dispatch team that answers the phone and handles the parts of the job you'd rather not.</p>
+    </div>
+
+    <div style="position:relative;">
+      <div class="route-line"></div>
+      <div class="stop">
+        <div class="stop-marker">1</div>
+        <div><h3>Load booking</h3><p>We work the load boards and our broker relationships to find freight that actually pays — matched to your lanes, equipment, and hours of service.</p></div>
+      </div>
+      <div class="stop">
+        <div class="stop-marker">2</div>
+        <div><h3>Rate negotiation</h3><p>Every rate gets pushed before it gets booked. We know what the lane is worth and we don't take the first number offered.</p></div>
+      </div>
+      <div class="stop">
+        <div class="stop-marker">3</div>
+        <div><h3>Paperwork &amp; invoicing</h3><p>Rate cons, BOLs, invoicing, factoring submissions — handled and filed, so nothing holds up your check.</p></div>
+      </div>
+      <div class="stop">
+        <div class="stop-marker">4</div>
+        <div><h3>Route &amp; compliance support</h3><p>Routing that respects your hours, plus a heads-up on the DOT and ELD details that are easy to miss from the driver's seat.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene-sec" id="how-it-moves">
+  <div class="wrap scene-head">
+    <h2>From the dispatch desk to the dock door.</h2>
+    <p class="section-desc">The load gets booked, the truck rolls, the invoice prints. You drive; we handle everything in between.</p>
+  </div>
+  <svg class="scene is-paused" id="scene" viewBox="0 0 1200 560" role="img" aria-label="Animated illustration: a dispatcher books a load, a truck picks up boxes at a warehouse and delivers them to a market, then an invoice prints in the Appyron office.">
+  <defs>
+    <pattern id="wn" width="16" height="22" patternUnits="userSpaceOnUse"><rect x="4" y="5" width="7" height="10" fill="#EAF2F8" opacity=".75"></rect></pattern>
+    <pattern id="pil" width="12" height="28" patternUnits="userSpaceOnUse"><rect x="1" y="4" width="10" height="18" rx="2" fill="#9AA3AE"></rect></pattern>
+    <pattern id="awn" width="28" height="16" patternUnits="userSpaceOnUse"><rect width="14" height="16" fill="#EE4B24"></rect><rect x="14" width="14" height="16" fill="#fff"></rect></pattern>
+    <g id="sk"><rect x="-480" y="220" width="160" height="300"></rect><rect x="-300" y="260" width="150" height="260"></rect><rect x="-140" y="190" width="120" height="330"></rect><rect x="20" y="150" width="90" height="360"></rect><rect x="130" y="70" width="70" height="440"></rect><rect x="220" y="190" width="80" height="320"></rect><rect x="320" y="140" width="80" height="370"></rect><rect x="810" y="120" width="80" height="390"></rect><rect x="900" y="200" width="90" height="310"></rect><rect x="1000" y="100" width="60" height="410"></rect><rect x="1070" y="170" width="120" height="340"></rect><rect x="1190" y="200" width="120" height="310"></rect><rect x="1320" y="150" width="100" height="360"></rect><rect x="1440" y="240" width="160" height="270"></rect><rect x="1620" y="180" width="140" height="330"></rect></g>
+    <g id="bx"><rect width="30" height="24" rx="1.5" fill="#D9A066"></rect><rect x="12" width="6" height="24" fill="#B97E45"></rect><rect width="30" height="4" fill="#E7BB82"></rect></g>
+    <g id="bust">
+      <path d="M-17 0V-20C-17 -33 -8 -37 0 -37S17 -33 17 -20V0Z" style="fill:var(--shirt,#2F4B73)"></path>
+      <rect x="-3.5" y="-44" width="7" height="9" style="fill:var(--skin,#E0AC84)"></rect>
+      <circle cy="-53" r="10.5" style="fill:var(--skin,#E0AC84)"></circle>
+      <path d="M-11 -54C-12 -67 12 -67 11 -54C8 -59 -6 -59 -11 -54Z" style="fill:var(--hair,#2B1D14)"></path>
+    </g>
+    <g id="hs"><path d="M-12 -55C-12 -68 12 -68 12 -55" fill="none" stroke="#1F2937" stroke-width="2.4"></path><path d="M-12 -55v7q0 4 6 4" fill="none" stroke="#1F2937" stroke-width="2"></path></g>
+    <g id="stand">
+      <rect x="-10" y="-36" width="8" height="36" rx="2" style="fill:var(--pants,#2B3445)"></rect>
+      <rect x="2" y="-36" width="8" height="36" rx="2" style="fill:var(--pants,#2B3445)"></rect>
+      <path d="M-14 -34V-56C-14 -63 -8 -66 0 -66S14 -63 14 -56V-34Z" style="fill:var(--shirt,#2F4B73)"></path>
+      <rect x="-19" y="-62" width="6" height="26" rx="3" style="fill:var(--shirt,#2F4B73)"></rect>
+      <rect x="13" y="-62" width="6" height="26" rx="3" style="fill:var(--shirt,#2F4B73)"></rect>
+      <rect x="-3" y="-72" width="6" height="7" style="fill:var(--skin,#E0AC84)"></rect>
+      <circle cy="-80" r="10" style="fill:var(--skin,#E0AC84)"></circle>
+      <path d="M-10 -81C-11 -94 11 -94 10 -81C7 -86 -6 -86 -10 -81Z" style="fill:var(--hair,#2B1D14)"></path>
+    </g>
+    <g id="pn"><polygon points="0,0 28,-36 100,-36 72,0" fill="#2F6DB5" stroke="#E8F1F8" stroke-width="2"></polygon><path d="M24 0L52 -36M48 0L76 -36M14 -18H86" stroke="#E8F1F8" stroke-width="1.5" opacity=".7"></path></g>
+  </defs>
+
+  <!-- skyline -->
+  <use href="#sk" fill="#CCDCE8"></use>
+  <use href="#sk" fill="url(#wn)"></use>
+  <path d="M165 40V70" stroke="#CCDCE8" stroke-width="3"></path>
+  <g fill="#B8CDDF"><rect x="0" y="270" width="64" height="240"></rect><rect x="296" y="250" width="100" height="260"></rect><rect x="850" y="270" width="60" height="240"></rect><rect x="1120" y="240" width="90" height="270"></rect></g>
+
+  <!-- street -->
+  <rect x="-2000" y="500" width="5200" height="12" fill="#C6D0DA"></rect>
+  <rect x="-2000" y="510" width="5200" height="4" fill="#9AA6B2"></rect>
+  <rect x="-2000" y="514" width="5200" height="80" fill="#2B2F36"></rect>
+  <path d="M-2000 542H3200" stroke="#F4EBD8" stroke-width="3" stroke-dasharray="28 24"></path>
+
+  <!-- utility pole -->
+  <rect x="402" y="170" width="7" height="332" fill="#6B7280"></rect>
+  <rect x="372" y="182" width="66" height="7" fill="#5B6270"></rect>
+  <g fill="#8E97A3"><circle cx="380" cy="177" r="4"></circle><circle cx="405" cy="177" r="4"></circle><circle cx="430" cy="177" r="4"></circle></g>
+  <rect x="392" y="215" width="26" height="40" rx="2" fill="#8A94A0"></rect><path d="M397 220V250M405 220V250M413 220V250" stroke="#6B7280" stroke-width="2"></path>
+
+  <!-- BUILDING 1: shipper warehouse -->
+  <use href="#pn" x="50" y="262"></use><use href="#pn" x="150" y="262"></use><use href="#pn" x="250" y="262"></use>
+  <rect x="24" y="258" width="372" height="10" fill="#2E4668"></rect>
+  <rect x="30" y="268" width="360" height="232" fill="#3F5E88"></rect>
+  <rect x="46" y="282" width="328" height="146" fill="#F1E8D3" stroke="#1E2A3B" stroke-width="3"></rect>
+  <g fill="#B8602A"><rect x="58" y="296" width="5" height="132"></rect><rect x="168" y="296" width="5" height="132"></rect><rect x="58" y="330" width="115" height="5"></rect><rect x="58" y="372" width="115" height="5"></rect><rect x="58" y="414" width="115" height="5"></rect></g>
+  <use href="#bx" x="68" y="306"></use><use href="#bx" x="102" y="306"></use><use href="#bx" x="136" y="306"></use>
+  <use href="#bx" x="72" y="348"></use><use href="#bx" x="108" y="348"></use>
+  <use href="#bx" x="66" y="390"></use><use href="#bx" x="100" y="390"></use><use href="#bx" x="134" y="390"></use>
+  <rect x="186" y="404" width="154" height="10" fill="#4A4F58"></rect><path d="M190 409H336" stroke="#6B7380" stroke-width="2" stroke-dasharray="6 8"></path>
+  <rect x="196" y="414" width="5" height="14" fill="#4A4F58"></rect><rect x="326" y="414" width="5" height="14" fill="#4A4F58"></rect>
+  <use href="#bx" class="sc-cb" x="192" y="380"></use><use href="#bx" class="sc-cb" x="192" y="380" style="animation-delay:3s"></use>
+  <g transform="translate(356 428)"><use href="#stand" style="--shirt:#EE4B24;--pants:#2B3445;--skin:#C98F68;--hair:#1A1410"></use><path d="M-14 -48H14" stroke="#fff" stroke-width="3"></path><path d="M-11 -82C-11 -96 11 -96 11 -82Z" fill="#F4C20D"></path><rect x="-13" y="-83" width="26" height="3" rx="1.5" fill="#F4C20D"></rect></g>
+  <use href="#bx" x="332" y="372"></use>
+  <rect x="70" y="436" width="270" height="64" fill="#1C2433"></rect>
+  <use href="#bx" x="82" y="476"></use><use href="#bx" x="82" y="452"></use><use href="#bx" x="112" y="476"></use>
+  <rect x="70" y="436" width="270" height="12" fill="#8592A3"></rect><path d="M70 442H340" stroke="#6B7787" stroke-width="2"></path>
+  <rect x="70" y="436" width="270" height="64" fill="none" stroke="#0F1622" stroke-width="3"></rect>
+
+  <!-- BUILDING 2: Appyron dispatch office -->
+  <rect x="510" y="98" width="6" height="16" fill="#5B6270"></rect><rect x="704" y="98" width="6" height="16" fill="#5B6270"></rect>
+  <rect x="490" y="62" width="240" height="36" rx="3" fill="#EE4B24"></rect>
+  <text x="610" y="88" text-anchor="middle" font-size="20" font-weight="600" fill="#fff" letter-spacing="2.5">APPYRON DISPATCH</text>
+  <rect x="412" y="104" width="396" height="10" fill="#E4DAC3"></rect>
+  <rect x="420" y="114" width="380" height="386" fill="#F8F0DD"></rect>
+  <rect x="424" y="130" width="12" height="364" fill="url(#pil)"></rect><rect x="784" y="130" width="12" height="364" fill="url(#pil)"></rect>
+  <!-- dispatch floor -->
+  <rect x="446" y="130" width="328" height="132" fill="#EAF4F9" stroke="#1F2937" stroke-width="3"></rect>
+  <rect x="566" y="146" width="104" height="62" rx="2" fill="#fff" stroke="#94A3B8" stroke-width="2"></rect>
+  <path d="M566 167H670M566 187H670M592 146V208M618 146V208M644 146V208" stroke="#E2E8F0"></path>
+  <path class="sc-flow" d="M578 198L602 172L626 186L654 160" fill="none" stroke="#EE4B24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+  <circle cx="578" cy="198" r="4" fill="#16a34a"></circle><circle cx="654" cy="160" r="5" fill="#EE4B24" stroke="#fff" stroke-width="2"></circle>
+  <circle cx="704" cy="166" r="11" fill="#fff" stroke="#1F2937" stroke-width="2"></circle><path d="M704 166V159M704 166L709 168" stroke="#1F2937" stroke-width="2" stroke-linecap="round"></path>
+  <g transform="translate(488 232)"><use href="#bust" style="--shirt:#2F4B73;--skin:#E0AC84;--hair:#2B1D14"></use><use href="#hs"></use></g>
+  <rect x="458" y="232" width="110" height="7" fill="#A8744A"></rect><rect x="466" y="239" width="5" height="23" fill="#7C5535"></rect><rect x="552" y="239" width="5" height="23" fill="#7C5535"></rect>
+  <rect x="514" y="196" width="44" height="30" rx="2" fill="#1F2A37"></rect><rect x="533" y="226" width="6" height="6" fill="#4B5563"></rect>
+  <path d="M520 204h18M520 210h28M520 216h12" stroke="#7DD3FC" stroke-width="3" stroke-linecap="round"></path><rect x="544" y="204" width="8" height="12" fill="#EE4B24"></rect>
+  <g transform="translate(742 232)"><use href="#bust" style="--shirt:#EE4B24;--skin:#B9825C;--hair:#1A1410"></use><use href="#hs"></use></g>
+  <rect x="660" y="232" width="110" height="7" fill="#A8744A"></rect><rect x="668" y="239" width="5" height="23" fill="#7C5535"></rect><rect x="756" y="239" width="5" height="23" fill="#7C5535"></rect>
+  <rect x="676" y="196" width="44" height="30" rx="2" fill="#1F2A37"></rect><rect x="695" y="226" width="6" height="6" fill="#4B5563"></rect>
+  <path d="M682 204h18M682 210h28M682 216h12" stroke="#7DD3FC" stroke-width="3" stroke-linecap="round"></path><rect x="706" y="204" width="8" height="12" fill="#16a34a"></rect>
+  <rect x="438" y="268" width="344" height="8" fill="#E4DAC3"></rect>
+  <!-- paperwork floor -->
+  <rect x="446" y="296" width="328" height="96" fill="#F8E7CC" stroke="#1F2937" stroke-width="3"></rect>
+  <rect x="462" y="326" width="34" height="66" fill="#8795A6"></rect><path d="M462 348H496M462 370H496" stroke="#6B7787" stroke-width="2"></path><g fill="#475569"><rect x="475" y="336" width="8" height="3"></rect><rect x="475" y="358" width="8" height="3"></rect><rect x="475" y="380" width="8" height="3"></rect></g>
+  <rect x="500" y="342" width="30" height="50" fill="#98A5B5"></rect><path d="M500 367H530" stroke="#6B7787" stroke-width="2"></path>
+  <rect x="540" y="308" width="30" height="26" fill="#fff" stroke="#94A3B8" stroke-width="2"></rect><path d="M546 316H564M546 322H560" stroke="#CBD5E1" stroke-width="2"></path><path d="M552 329l3 3 6-7" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round"></path>
+  <g transform="translate(596 366)"><use href="#bust" style="--shirt:#475569;--skin:#E0AC84;--hair:#6B3F1D"></use></g>
+  <rect x="552" y="366" width="140" height="7" fill="#A8744A"></rect><rect x="560" y="373" width="5" height="19" fill="#7C5535"></rect><rect x="680" y="373" width="5" height="19" fill="#7C5535"></rect>
+  <rect x="620" y="336" width="40" height="28" rx="2" fill="#1F2A37"></rect><rect x="637" y="364" width="6" height="2" fill="#4B5563"></rect><rect x="627" y="342" width="18" height="14" fill="#fff"></rect><path d="M630 346H642M630 351H639" stroke="#94A3B8" stroke-width="2"></path><rect x="648" y="342" width="6" height="14" fill="#EE4B24"></rect>
+  <rect class="sc-pp" x="722" y="334" width="26" height="26" fill="#fff" stroke="#94A3B8" stroke-width="2"></rect>
+  <rect x="712" y="352" width="44" height="26" rx="3" fill="#D7DCE3" stroke="#8A94A0" stroke-width="2"></rect><rect x="720" y="357" width="28" height="4" fill="#8A94A0"></rect>
+  <rect x="706" y="378" width="56" height="6" fill="#A8744A"></rect><rect x="710" y="384" width="4" height="8" fill="#7C5535"></rect><rect x="754" y="384" width="4" height="8" fill="#7C5535"></rect>
+  <rect x="438" y="394" width="344" height="8" fill="#E4DAC3"></rect>
+  <!-- ground floor -->
+  <rect x="446" y="404" width="328" height="96" fill="#8F9AA7"></rect>
+  <rect x="546" y="396" width="128" height="10" fill="#EE4B24"></rect>
+  <rect x="558" y="406" width="104" height="94" fill="#5E6B7A"></rect>
+  <rect x="564" y="412" width="44" height="88" fill="#B7ECEF"></rect><rect x="612" y="412" width="44" height="88" fill="#B7ECEF"></rect>
+  <path d="M572 500L596 412M584 500L606 412M620 500L644 412" stroke="#fff" stroke-width="4" opacity=".45"></path>
+  <rect x="602" y="450" width="3" height="18" fill="#2B3445"></rect><rect x="615" y="450" width="3" height="18" fill="#2B3445"></rect>
+  <rect x="462" y="424" width="76" height="58" fill="#B7ECEF" stroke="#5E6B7A" stroke-width="4"></rect><path d="M500 424V482M462 453H538" stroke="#5E6B7A" stroke-width="3"></path>
+  <rect x="682" y="424" width="76" height="58" fill="#B7ECEF" stroke="#5E6B7A" stroke-width="4"></rect><path d="M720 424V482M682 453H758" stroke="#5E6B7A" stroke-width="3"></path>
+
+  <!-- BUILDING 3: receiving market -->
+  <rect x="1080" y="276" width="56" height="18" fill="#B9C3CE"></rect><circle cx="1096" cy="285" r="6" fill="#8A94A0"></circle><circle cx="1120" cy="285" r="6" fill="#8A94A0"></circle>
+  <rect x="824" y="294" width="352" height="10" fill="#3D4F6A"></rect>
+  <rect x="830" y="304" width="340" height="196" fill="#8FB0D0"></rect>
+  <g fill="#E6F1F8" stroke="#5F7A99" stroke-width="3"><rect x="852" y="316" width="36" height="30"></rect><rect x="906" y="316" width="36" height="30"></rect><rect x="960" y="316" width="36" height="30"></rect><rect x="1068" y="316" width="36" height="30"></rect><rect x="1122" y="316" width="36" height="30"></rect></g>
+  <rect x="1014" y="316" width="36" height="30" fill="#FFE7A3" stroke="#5F7A99" stroke-width="3"></rect>
+  <rect x="830" y="352" width="340" height="34" fill="#22385A"></rect>
+  <text x="1000" y="377" text-anchor="middle" font-size="22" font-weight="600" fill="#fff" letter-spacing="3">FRESH MARKET</text>
+  <rect x="830" y="386" width="340" height="16" fill="url(#awn)"></rect>
+  <rect x="846" y="404" width="308" height="96" fill="#EFE7D6" stroke="#1F2937" stroke-width="3"></rect>
+  <g fill="#B8602A"><rect x="1112" y="410" width="4" height="90"></rect><rect x="1112" y="424" width="40" height="4"></rect><rect x="1112" y="452" width="40" height="4"></rect><rect x="1112" y="480" width="40" height="4"></rect></g>
+  <g><rect x="1118" y="412" width="8" height="12" fill="#D1495B"></rect><rect x="1128" y="412" width="8" height="12" fill="#E9B44C"></rect><rect x="1138" y="412" width="8" height="12" fill="#66A182"></rect><rect x="1118" y="440" width="8" height="12" fill="#2E86AB"></rect><rect x="1128" y="440" width="8" height="12" fill="#E9B44C"></rect><rect x="1138" y="440" width="8" height="12" fill="#D1495B"></rect><rect x="1118" y="468" width="8" height="12" fill="#66A182"></rect><rect x="1128" y="468" width="8" height="12" fill="#2E86AB"></rect><rect x="1138" y="468" width="8" height="12" fill="#E9B44C"></rect></g>
+  <g transform="translate(1060 458)"><use href="#bust" style="--shirt:#E88A3C;--skin:#D5A07A;--hair:#1A1410"></use></g>
+  <rect x="1034" y="462" width="70" height="38" fill="#B9753E"></rect><rect x="1030" y="458" width="78" height="6" fill="#D9A066"></rect>
+  <rect x="1080" y="442" width="22" height="16" fill="#3B4452"></rect><rect x="1084" y="446" width="14" height="5" fill="#7DD3FC"></rect>
+  <g transform="translate(892 500)"><use href="#stand" style="--shirt:#1E8E8A;--pants:#2B3445;--skin:#C98F68;--hair:#1A1410"></use></g>
+  <use href="#bx" class="sc-sb" style="--i:0" x="916" y="476"></use><use href="#bx" class="sc-sb" style="--i:1" x="948" y="476"></use><use href="#bx" class="sc-sb" style="--i:2" x="980" y="476"></use>
+  <use href="#bx" class="sc-sb" style="--i:3" x="932" y="452"></use><use href="#bx" class="sc-sb" style="--i:4" x="964" y="452"></use>
+
+  <!-- dock worker checking the truck in -->
+  <g transform="translate(116 500)"><use href="#stand" style="--shirt:#EE4B24;--pants:#2B3445;--skin:#B9825C;--hair:#1A1410"></use><path d="M-14 -48H14" stroke="#fff" stroke-width="3"></path><path d="M-11 -82C-11 -96 11 -96 11 -82Z" fill="#F4C20D"></path><rect x="-13" y="-83" width="26" height="3" rx="1.5" fill="#F4C20D"></rect><rect x="12" y="-56" width="11" height="15" rx="1" fill="#fff" stroke="#1F2937" stroke-width="1.5"></rect></g>
+
+  <!-- dispatch signal: office to truck -->
+  <path class="sc-line" pathLength="100" d="M486 176C410 196 300 250 235 347" fill="none" stroke="#EE4B24" stroke-width="3"></path>
+
+  <!-- truck -->
+  <g transform="translate(0 432)">
+    <g class="sc-truck">
+      <ellipse cx="137" cy="111" rx="152" ry="5" fill="#000" opacity=".25"></ellipse>
+      <rect x="0" y="0" width="190" height="88" rx="4" fill="#EE4B24"></rect>
+      <text x="95" y="21" text-anchor="middle" font-size="16" font-weight="600" fill="#fff" letter-spacing="4">APPYRON</text>
+      <rect x="10" y="28" width="170" height="50" rx="3" fill="#FBEFD9" stroke="#8E2F14" stroke-width="2"></rect>
+      <use href="#bx" class="sc-tb" style="--i:0" x="18" y="54"></use><use href="#bx" class="sc-tb" style="--i:1" x="52" y="54"></use><use href="#bx" class="sc-tb" style="--i:2" x="86" y="54"></use>
+      <use href="#bx" class="sc-tb" style="--i:3" x="35" y="30"></use><use href="#bx" class="sc-tb" style="--i:4" x="69" y="30"></use>
+      <rect x="0" y="80" width="190" height="8" fill="#C43E1E"></rect>
+      <rect x="0" y="68" width="4" height="10" fill="#7A1C0A"></rect>
+      <rect x="190" y="70" width="10" height="10" fill="#333"></rect>
+      <rect x="204" y="6" width="5" height="26" fill="#8A8F98"></rect>
+      <path d="M200 30H240C246 30 250 33 253 38L270 62V88H200Z" fill="#fff" stroke="#C43E1E" stroke-width="2.5"></path>
+      <path d="M212 38H238C241 38 243 40 244 42L254 58H212Z" fill="#BFE3EE" stroke="#1F2937" stroke-width="1.5"></path>
+      <circle cx="226" cy="48" r="6" fill="#E0AC84"></circle><path d="M218 58C218 53 234 53 234 58Z" fill="#2F4B73"></path>
+      <rect x="200" y="66" width="70" height="6" fill="#EE4B24"></rect>
+      <rect x="262" y="78" width="12" height="10" rx="2" fill="#333"></rect><rect x="266" y="64" width="5" height="8" fill="#FFD25A"></rect>
+      <g transform="translate(30 98)"><g class="sc-wh"><circle r="13" fill="#17181B"></circle><circle r="7" fill="#9AA2AD"></circle><circle r="2.5" fill="#17181B"></circle><path d="M0 -7V7M-7 0H7" stroke="#17181B" stroke-width="2"></path></g></g>
+      <g transform="translate(58 98)"><g class="sc-wh"><circle r="13" fill="#17181B"></circle><circle r="7" fill="#9AA2AD"></circle><circle r="2.5" fill="#17181B"></circle><path d="M0 -7V7M-7 0H7" stroke="#17181B" stroke-width="2"></path></g></g>
+      <g transform="translate(232 98)"><g class="sc-wh"><circle r="13" fill="#17181B"></circle><circle r="7" fill="#9AA2AD"></circle><circle r="2.5" fill="#17181B"></circle><path d="M0 -7V7M-7 0H7" stroke="#17181B" stroke-width="2"></path></g></g>
+    </g>
+  </g>
+
+  <!-- rate confirmation popover at pickup -->
+  <g transform="translate(235 414)">
+    <g class="sc-tk">
+      <polygon points="-8,0 8,0 0,9" fill="#fff" stroke="#1F2937" stroke-width="2" stroke-linejoin="round"></polygon>
+      <rect x="-75" y="-64" width="150" height="64" rx="6" fill="#fff" stroke="#1F2937" stroke-width="2"></rect>
+      <rect x="-9" y="-3" width="18" height="5" fill="#fff"></rect>
+      <path d="M-75 -42H75" stroke="#EE4B24" stroke-width="2" stroke-dasharray="5 4"></path>
+      <text class="mono" x="-66" y="-48" font-size="10" fill="#5b5b5b">RATE CON #AY-10482</text>
+      <text class="mono" x="-66" y="-26" font-size="11" font-weight="500" fill="#161616">Chicago → Dallas</text>
+      <text class="mono" x="-66" y="-9" font-size="11" font-weight="500" fill="#161616">$2,450 all-in</text>
+      <g transform="rotate(-8 44 -14)"><rect x="20" y="-25" width="50" height="19" rx="3" fill="#fff" stroke="#EE4B24" stroke-width="2"></rect><text x="45" y="-11" text-anchor="middle" font-size="11" font-weight="700" fill="#EE4B24" letter-spacing="1">BOOKED</text></g>
+    </g>
+  </g>
+
+  <!-- delivered badge at drop-off -->
+  <g transform="translate(695 418)">
+    <g class="sc-dv">
+      <rect x="-72" y="-30" width="144" height="30" rx="15" fill="#16a34a"></rect>
+      <path d="M-54 -15l5 5 9-10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+      <text x="-30" y="-9" font-size="15" font-weight="600" fill="#fff" letter-spacing="1.5" textLength="92" lengthAdjust="spacing">DELIVERED</text>
+    </g>
+  </g>
+</svg>
+</section>
+
+
+<section class="section" id="why" style="padding-top:clamp(72px,9vw,120px);">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="section-eyebrow">Why Appyron</span>
+      <h2>Built Different. Run Better.</h2>
+      <p class="section-desc">A dispatch team built around the things that actually keep a truck profitable.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h3>Excellent English Communication</h3>
+        <p>Clear, professional communication with every broker and shipper. No language barriers, zero misunderstandings.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Dedicated Dispatcher</h3>
+        <p>Not a call center. One dispatcher who knows your truck, your lanes, and your rate floor — every single time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>
+        </div>
+        <h3>Higher Paying Loads</h3>
+        <p>We negotiate hard on every load. Our goal is maximum rate per mile, every dispatch, every week.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></svg>
+        </div>
+        <h3>Technology-Driven</h3>
+        <p>Modern load-matching tools, real-time tracking, and data-backed decisions put better loads in front of you first.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="trust">
+      <div class="trust-copy">
+        <span class="section-eyebrow">The Appyron Difference</span>
+        <p class="trust-quote">"We built this for the owner-operator who's tired of being the driver, the dispatcher, and the accountant before 8 a.m."</p>
+        <div class="trust-sig">— The Appyron Dispatch Team</div>
+      </div>
+      <div class="trust-copy">
+        <p>Appyron exists to take the non-driving work off your plate — the calls, the negotiating, the chasing down paperwork — so a truck spends more of its week loaded and moving.</p>
+        <p>Every account gets a dedicated dispatcher who knows your lanes and your numbers, not a rotating call queue.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Our promises</span>
+      <h2>What you can hold us to.</h2>
+    </div>
+    <div class="log">
+      <div class="log-header"><span>CHANNEL 19 — DISPATCH PROMISES</span><span>ON THE RECORD</span></div>
+      <div class="log-entry">
+        <div><div class="log-time">01</div><div class="log-handle">Rate floor</div></div>
+        <div class="log-msg">We never book below the rate floor you set. You tell us the number, we negotiate above it.
+          <span class="role">Your lanes. Your numbers.</span>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div><div class="log-time">02</div><div class="log-handle">Your call</div></div>
+        <div class="log-msg">You approve every load before we book it. You set the lanes, the rate floor and your home time. We bring options and fight for the rate.
+          <span class="role">Always your call</span>
+        </div>
+      </div>
+      <div class="log-entry">
+        <div><div class="log-time">03</div><div class="log-handle">Straight pricing</div></div>
+        <div class="log-msg">One flat percentage, agreed before you sign. No setup fees, nothing on loads we don't book.
+          <span class="role">In writing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="hos-calculator" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Free tool</span>
+      <h2>HOS Delivery-Time Calculator.</h2>
+      <p>Enter your miles and start time. We build the trip around the 11-hour, 14-hour and 70-hour clocks, the 30-minute break, 10-hour resets and fuel stops, so you know when you will really arrive.</p>
+    </div>
+    <div class="calc-card">
+      <div class="hos-in">
+        <div><label for="h-miles">Total loaded + deadhead miles</label><input type="number" id="h-miles" value="920" min="1"></div>
+        <div><label for="h-speed">Avg moving speed (mph)</label><input type="number" id="h-speed" value="55" min="20" max="75"></div>
+        <div><label for="h-mode">Driver setup</label><select id="h-mode"><option value="solo">Solo driver</option><option value="team">Team (2 drivers)</option></select></div>
+        <div><label for="h-start">Start time (rolling out)</label><input type="datetime-local" id="h-start"></div>
+        <div><label for="h-load">Loading time (hrs)</label><input type="number" id="h-load" value="2" min="0" step="0.25"></div>
+        <div><label for="h-unload">Unloading time (hrs)</label><input type="number" id="h-unload" value="2" min="0" step="0.25"></div>
+        <div><label for="h-appt">Delivery appointment (optional)</label><input type="datetime-local" id="h-appt"></div>
+        <div><label for="h-fuel">Fuel stop (min, every ~600 mi)</label><input type="number" id="h-fuel" value="30" min="0"></div>
+        <div><label for="h-drv">Driving hrs used today (of 11)</label><input type="number" id="h-drv" value="0" min="0" max="11" step="0.25"></div>
+        <div><label for="h-win">14-hr window used (hrs)</label><input type="number" id="h-win" value="0" min="0" max="14" step="0.25"></div>
+        <div><label for="h-cyc">Hrs left in 70-hr cycle</label><input type="number" id="h-cyc" value="70" min="0" max="70" step="0.25"></div>
+      </div>
+      <button class="hos-btn" id="h-go" type="button">Calculate my arrival time</button>
+      <div class="hos-out" id="h-out" aria-live="polite">Press calculate to see your timeline.</div>
+      <p class="calc-note" style="margin-top:10px;">Assumes FMCSA property-carrying rules: 11-hr driving limit, 14-hr window, 30-min break after 8 hrs driving, 10-hr off-duty reset, and the 70-hr/8-day cycle with a 34-hr restart. Team mode assumes about 20 hrs of movement per day. It does not model sleeper-berth splits or the adverse-driving exception. This is a planning estimate, not legal advice. Your ELD is the source of truth.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="services-by-equipment" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Equipment we dispatch</span>
+      <h2>Truck dispatch service for every trailer.</h2>
+    </div>
+    <div class="equip">
+      <div class="info-card"><svg class="eq-ico" viewBox="0 0 116 56" width="116" height="56" aria-hidden="true"><rect x="4" y="12" width="82" height="34" rx="3" fill="#EE4B24"/><rect x="10" y="20" width="70" height="3" fill="#fff" opacity=".5"/><path d="M88 22h14l8 10v16H88z" fill="#161616"/><path d="M93 26h8l5 7H93z" fill="#8cc3e8"/><circle cx="20" cy="48" r="6" fill="#161616"/><circle cx="20" cy="48" r="2.4" fill="#9aa"/><circle cx="34" cy="48" r="6" fill="#161616"/><circle cx="34" cy="48" r="2.4" fill="#9aa"/><circle cx="98" cy="48" r="6" fill="#161616"/><circle cx="98" cy="48" r="2.4" fill="#9aa"/></svg><h3><a href="/dry-van-dispatch.html" style="color:inherit;text-decoration:none">Dry van dispatch</a></h3><p>Steady freight and backhauls that get you home, planned a week ahead, not just the next load.</p></div>
+      <div class="info-card"><svg class="eq-ico" viewBox="0 0 116 56" width="116" height="56" aria-hidden="true"><rect x="4" y="12" width="82" height="34" rx="3" fill="#fff" stroke="#c9ced6" stroke-width="2"/><rect x="72" y="16" width="11" height="16" rx="2" fill="#7dd3fc"/><g stroke="#EE4B24" stroke-width="2.5"><line x1="30" y1="22" x2="30" y2="38"/><line x1="22" y1="30" x2="38" y2="30"/><line x1="24" y1="24" x2="36" y2="36"/><line x1="36" y1="24" x2="24" y2="36"/></g><path d="M88 22h14l8 10v16H88z" fill="#161616"/><path d="M93 26h8l5 7H93z" fill="#8cc3e8"/><circle cx="20" cy="48" r="6" fill="#161616"/><circle cx="20" cy="48" r="2.4" fill="#9aa"/><circle cx="34" cy="48" r="6" fill="#161616"/><circle cx="34" cy="48" r="2.4" fill="#9aa"/><circle cx="98" cy="48" r="6" fill="#161616"/><circle cx="98" cy="48" r="2.4" fill="#9aa"/></svg><h3><a href="/reefer-dispatch.html" style="color:inherit;text-decoration:none">Reefer dispatch</a></h3><p>Temperature-controlled loads at reefer rates, with detention and lumper issues handled for you.</p></div>
+      <div class="info-card"><svg class="eq-ico" viewBox="0 0 116 56" width="116" height="56" aria-hidden="true"><rect x="4" y="38" width="82" height="6" fill="#444"/><rect x="12" y="20" width="26" height="18" fill="#EE4B24"/><rect x="42" y="26" width="30" height="12" fill="#c9915a"/><path d="M88 22h14l8 10v16H88z" fill="#161616"/><path d="M93 26h8l5 7H93z" fill="#8cc3e8"/><circle cx="20" cy="48" r="6" fill="#161616"/><circle cx="20" cy="48" r="2.4" fill="#9aa"/><circle cx="34" cy="48" r="6" fill="#161616"/><circle cx="34" cy="48" r="2.4" fill="#9aa"/><circle cx="98" cy="48" r="6" fill="#161616"/><circle cx="98" cy="48" r="2.4" fill="#9aa"/></svg><h3><a href="/flatbed-dispatch.html" style="color:inherit;text-decoration:none">Flatbed &amp; step deck dispatch</a></h3><p>Open-deck freight matched to your tarps, straps and permits, with strong rates on specialty loads.</p></div>
+      <div class="info-card"><svg class="eq-ico" viewBox="0 0 116 56" width="116" height="56" aria-hidden="true"><rect x="4" y="14" width="64" height="30" rx="3" fill="none" stroke="#9aa" stroke-width="2" stroke-dasharray="5 4"/><rect x="62" y="40" width="30" height="4" fill="#EE4B24"/><path d="M88 22h14l8 10v16H88z" fill="#161616"/><path d="M93 26h8l5 7H93z" fill="#8cc3e8"/><circle cx="76" cy="48" r="6" fill="#161616"/><circle cx="76" cy="48" r="2.4" fill="#9aa"/><circle cx="98" cy="48" r="6" fill="#161616"/><circle cx="98" cy="48" r="2.4" fill="#9aa"/></svg><h3><a href="/power-only-dispatch.html" style="color:inherit;text-decoration:none">Power-only dispatch</a></h3><p>Drop-and-hook loads and power-only freight that keep your tractor moving.</p></div>
+      <div class="info-card"><svg class="eq-ico" viewBox="0 0 116 56" width="116" height="56" aria-hidden="true"><rect x="10" y="14" width="62" height="32" rx="3" fill="#EE4B24"/><path d="M76 24h14l8 10v12H76z" fill="#161616"/><path d="M80 28h8l5 6H80z" fill="#8cc3e8"/><circle cx="24" cy="48" r="6" fill="#161616"/><circle cx="24" cy="48" r="2.4" fill="#9aa"/><circle cx="60" cy="48" r="6" fill="#161616"/><circle cx="60" cy="48" r="2.4" fill="#9aa"/><circle cx="88" cy="48" r="6" fill="#161616"/><circle cx="88" cy="48" r="2.4" fill="#9aa"/></svg><h3>Box truck &amp; hotshot dispatch</h3><p>Expedited and hotshot loads with a dispatcher who knows what your lane is worth.</p></div>
+      <div class="info-card"><svg class="eq-ico" viewBox="0 0 116 56" width="116" height="56" aria-hidden="true"><rect x="30" y="6" width="50" height="42" rx="4" fill="#fff" stroke="#EE4B24" stroke-width="3"/><polyline points="43,28 53,38 69,18" fill="none" stroke="#2aa05a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><h3><a href="/dispatch-service-for-new-mc-authority.html" style="color:inherit;text-decoration:none">New MC authority dispatch</a></h3><p>Carrier packets and broker setup so a brand-new authority can start booking quickly.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="new-mc" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">New MC authority?</span>
+      <h2>Your first loads, without the guesswork.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
+      <div class="info-card"><h3>1. Send your MC &amp; equipment</h3><p>Dry van, reefer, flatbed or power-only. Tell us your lanes and your rate floor.</p></div>
+      <div class="info-card"><h3>2. We build your packet</h3><p>Carrier packet, insurance and broker setup so brokers can book you fast.</p></div>
+      <div class="info-card"><h3>3. Start running</h3><p>Your dedicated dispatcher sends options. You choose. We handle rate cons and invoicing.</p></div>
+    </div>
+    <p style="margin-top:20px;"><a href="#contact" class="btn-primary">Get started</a> &nbsp; <a href="#calculator">or try the free rate calculator</a></p>
+    </div>
+</div>
+</section>
+
+<section class="section" id="calculator" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="section-eyebrow">Free tool</span>
+      <h2>Rate &amp; Cost Per Mile Calculator</h2>
+      <p class="section-desc">Two numbers decide whether a load is worth taking: what it pays per mile, and what it costs you per mile. This runs both, side by side, live as you type.</p>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-grid">
+        <div class="calc-inputs">
+
+          <div class="calc-group">
+            <div class="calc-group-title"><span class="n">1</span> The Load</div>
+            <div class="form-row">
+              <div class="form-field"><label for="calc-rate">Gross rate offered ($)</label><input type="number" id="calc-rate" value="2450" min="0" step="1"></div>
+              <div class="form-field"><label for="calc-miles">Loaded miles</label><input type="number" id="calc-miles" value="820" min="1" step="1"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-field"><label for="calc-deadhead">Deadhead miles (empty)</label><input type="number" id="calc-deadhead" value="65" min="0" step="1"></div>
+              <div class="form-field"><label for="calc-equip">Equipment type</label>
+                <select id="calc-equip">
+                  <option value="6.5" selected>Dry Van (~6.5 MPG)</option>
+                  <option value="6.0">Reefer (~6.0 MPG)</option>
+                  <option value="6.2">Flatbed (~6.2 MPG)</option>
+                  <option value="6.0">Step Deck (~6.0 MPG)</option>
+                  <option value="6.5">Power Only (~6.5 MPG)</option>
+                  <option value="5.8">Tanker (~5.8 MPG)</option>
+                  <option value="10">Box Truck / Hotshot (~10 MPG)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-group">
+            <div class="calc-group-title"><span class="n">2</span> Your Cost Per Mile</div>
+            <div class="calc-cost-row">
+              <label for="calc-mpg">Truck's average MPG (auto-set by equipment — edit if you know the real number)</label>
+              <input type="number" id="calc-mpg" value="6.5" min="1" step="0.1">
+            </div>
+            <div class="calc-cost-row">
+              <label for="calc-fuel">Diesel price ($/gal)</label>
+              <input type="number" id="calc-fuel" value="6.30" min="0" step="0.01">
+            </div>
+            <div class="calc-cost-row readonly">
+              <label>→ Fuel cost per mile (calculated)</label>
+              <input type="text" id="calc-fuel-cpm-display" readonly value="$0.97">
+            </div>
+            <div class="calc-cost-row">
+              <label for="calc-maint">Maintenance &amp; repairs ($/mi)</label>
+              <input type="number" id="calc-maint" value="0.17" min="0" step="0.01">
+            </div>
+            <div class="calc-cost-row">
+              <label for="calc-insurance">Insurance ($/mi)</label>
+              <input type="number" id="calc-insurance" value="0.10" min="0" step="0.01">
+            </div>
+            <div class="calc-cost-row">
+              <label for="calc-truckpay">Truck / trailer payment ($/mi)</label>
+              <input type="number" id="calc-truckpay" value="0.25" min="0" step="0.01">
+            </div>
+            <div class="calc-cost-row">
+              <label for="calc-permits">Permits, tolls &amp; misc ($/mi)</label>
+              <input type="number" id="calc-permits" value="0.04" min="0" step="0.01">
+            </div>
+            <div class="calc-cost-total"><span>Total cost per mile</span><span id="calc-total-cpm-display">$1.53/mi</span></div>
+          </div>
+
+          <p class="calc-note" style="margin-top:2px;">Diesel default is approximately the US national average for late October 2026 (~$6.30/gal, per AAA/EIA reporting). Diesel prices move weekly, so check the pump or AAA for today's number. The other four cost fields are typical owner-operator averages — swap in your real numbers for an accurate picture.</p>
+
+          <div class="calc-advanced-toggle" id="calcAdvToggle"><span id="calcAdvArrow">▸</span> Show advanced: factoring &amp; dispatch fees</div>
+          <div class="calc-advanced" id="calcAdvanced">
+            <div class="form-row">
+              <div class="form-field"><label for="calc-factoring">Factoring fee (%)</label><input type="number" id="calc-factoring" value="0" min="0" step="0.1"></div>
+              <div class="form-field"><label for="calc-dispatch">Dispatch fee (%)</label><input type="number" id="calc-dispatch" value="8" min="0" step="0.1"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-results" id="calcResults"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Questions</span>
+      <h2>Frequently asked questions.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>How much do you charge? <span class="chev">▾</span></summary>
+        <div class="faq-a">Our dispatch fee is a flat percentage of each load's gross, agreed before you sign on — no setup fees and no charges on loads we don't book for you.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What truck types do you dispatch? <span class="chev">▾</span></summary>
+        <div class="faq-a">Dry van, reefer, flatbed, and power-only. Let us know your equipment and preferred lanes and we'll match freight accordingly.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Is there a forced-dispatch policy? <span class="chev">▾</span></summary>
+        <div class="faq-a">No. You approve every load before we book it. It's your truck, so you set the lanes, the rate floor and your home time. We bring strong options and negotiate hard.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How fast can I start running? <span class="chev">▾</span></summary>
+        <div class="faq-a">Most carriers are onboarded and booking their first load within 24–48 hours of signing up, once paperwork and carrier packets are in.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Do you work with owner-operators? <span class="chev">▾</span></summary>
+        <div class="faq-a">Yes — owner-operators are most of who we work with, alongside small fleets running a handful of trucks.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can non-US based drivers use the service? <span class="chev">▾</span></summary>
+        <div class="faq-a">We dispatch carriers authorized to operate in the US, regardless of where you're based, as long as your authority and insurance are current.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Do you dispatch new MC authorities? <span class="chev">▾</span></summary>
+        <div class="faq-a">Yes. New authorities are welcome. We help with carrier packets and broker setup so you can start booking loads.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What does a truck dispatcher do? <span class="chev">▾</span></summary>
+        <div class="faq-a">A dispatcher finds and books freight, negotiates rates with brokers, handles rate confirmations and paperwork, and plans routes around your hours of service so you can focus on driving.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What documents do I need to start? <span class="chev">▾</span></summary>
+        <div class="faq-a">Your MC/DOT authority, certificate of insurance, W-9 and a voided check or factoring details. We'll walk you through the rest.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What is the average truck dispatcher fee? <span class="chev">▾</span></summary>
+        <div class="faq-a">Many services charge between 5% and 10% of each load's gross revenue. Flat weekly or monthly fees are also common. <a href="/how-much-do-truck-dispatchers-charge.html">Read our pricing guide</a>.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Is a flat fee or a percentage better? <span class="chev">▾</span></summary>
+        <div class="faq-a">A percentage scales with your revenue and aligns the dispatcher's income with yours. A flat fee can be cheaper for high-grossing trucks. Compare what each includes.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Should I pay a setup fee to a dispatcher? <span class="chev">▾</span></summary>
+        <div class="faq-a">Be cautious. Many reputable services charge no setup fee and only get paid when you get paid.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact" style="padding-top:0;">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="info-card">
+        <h3>Business hours</h3>
+        <div class="hours-row"><span>Monday – Friday</span><span>8:00 AM – 5:00 PM CDT</span></div>
+        <div class="hours-row emergency"><span>Emergency dispatch</span><span>24/7 Always On</span></div>
+        <div class="social-row">
+          <a href="https://www.linkedin.com/company/appyron/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://www.instagram.com/appyron/" target="_blank" rel="noopener">Instagram ↗</a>
+        </div>
+      </div>
+      <div class="info-card">
+        <h3>Reach dispatch</h3>
+        <div class="hours-row"><span>Phone</span><span><a href="tel:+13467867777" style="color:inherit;text-decoration:none;">+1 346 786 7777</a></span></div>
+        <div class="hours-row"><span>Email</span><span><a href="mailto:dispatch@appyron.site" style="color:inherit;text-decoration:none;">dispatch@appyron.site</a></span></div>
+        <div class="hours-row"><span>Response time</span><span>Same day</span></div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h3>Send us a message</h3>
+      <form id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" required autocomplete="name">
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" required autocomplete="email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-phone">Phone (optional)</label>
+            <input type="tel" id="cf-phone" name="phone" autocomplete="tel">
+          </div>
+          <div class="form-field">
+            <label for="cf-truck">Truck / MC number (optional)</label>
+            <input type="text" id="cf-truck" name="truck">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" required></textarea>
+        </div>
+        <input type="text" name="company_website" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="btn-primary" id="cfSubmit">Send message</button>
+        <div class="form-status" id="cfStatus" role="status"></div>
+        <p class="form-note">Your message goes straight to our dispatch desk. We reply the same business day.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap">
+    <h2>Let's get your truck loaded.</h2>
+    <p>Call, text, or fill out the form — a dispatcher gets back to you the same day.</p>
+    <a href="#contact" class="btn-dark">Contact dispatch</a>
+  </div>
+</div>
+
+<div class="callbar"><a href="tel:+13467867777">Call +1 346 786 7777</a><a href="#contact">Get loads</a></div>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="logo-badge"><img src="data:image/webp;base64,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" alt="Appyron"></span>
+        <p>Truck dispatching, load booking, and freight solutions for owner-operators and small fleets.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why">Why Appyron</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/company/appyron/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/appyron/" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Appyron</span>
+      <span>Keep Rolling. We've Got the Rest.</span>
+    </div>
+  </div>
+<p style="text-align:center;font-size:13px;opacity:.75;margin:18px 12px 0;">Guides: <a href="/how-much-do-truck-dispatchers-charge.html" style="color:inherit">Pricing guide</a> · <a href="/dispatch-service-for-new-mc-authority.html" style="color:inherit">New MC authority</a> · <a href="/dry-van-dispatch.html" style="color:inherit">Dry van</a> · <a href="/reefer-dispatch.html" style="color:inherit">Reefer</a> · <a href="/flatbed-dispatch.html" style="color:inherit">Flatbed</a> · <a href="/power-only-dispatch.html" style="color:inherit">Power-only</a></p>
+</footer>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var st=$('h-start'); if(!st) return;
+  var n=new Date(); n.setMinutes(Math.ceil(n.getMinutes()/15)*15,0,0); n.setMinutes(n.getMinutes()-n.getTimezoneOffset()); st.value=n.toISOString().slice(0,16);
+  function hm(m){m=Math.round(m);return Math.floor(m/60)+'h '+(m%60)+'m'}
+  function fd(d){return d.toLocaleString([],{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}
+  var C={Drive:'#EE4B24','30-min break':'#2563eb','Fuel stop':'#eab308','10-hr reset':'#6b7280','34-hr restart':'#6b7280','Team rest':'#6b7280',Loading:'#16a34a',Unloading:'#16a34a'};
+  function calc(){
+    var miles=+$('h-miles').value||0, mph=Math.max(+$('h-speed').value||55,1), team=$('h-mode').value==='team';
+    var fuel=+$('h-fuel').value||0, t=0, drv=(+$('h-drv').value||0)*60, win=(+$('h-win').value||0)*60, cyc=(+$('h-cyc').value||70)*60;
+    var sb=0, tm=0, left=miles, sf=0, dm=0, rest=0, resets=0, g=0, ev=[];
+    function E(k,d,x){ev.push({k:k,s:t,e:t+d,x:x||''})}
+    function duty(m,k){E(k,m);t+=m;win+=m;cyc-=m}
+    duty((+$('h-load').value||0)*60,'Loading');
+    while(left>0.01 && g++<3000){
+      var toFuel=(600-sf)/mph*60, rem=left/mph*60, can;
+      if(team){ can=Math.min(rem,1200-tm,toFuel); } else { can=Math.min(660-drv,840-win,480-sb,cyc,rem,toFuel); }
+      if(can<=0.001){
+        if(team){ E('Team rest',240); t+=240; rest+=240; tm=0; resets++; }
+        else if(cyc<=0){ E('34-hr restart',2040); t+=2040; rest+=2040; drv=win=sb=0; cyc=4200; resets++; }
+        else if(sb>=480 && drv<660 && win<840){ E('30-min break',30); t+=30; win+=30; sb=0; rest+=30; }
+        else { E('10-hr reset',600); t+=600; rest+=600; drv=win=sb=0; resets++; }
+        continue;
+      }
+      var mi=can/60*mph; left-=mi; sf+=mi; E('Drive',can,Math.round(mi)+' mi'); t+=can; dm+=can;
+      if(team){ tm+=can; } else { drv+=can; win+=can; sb+=can; cyc-=can; }
+      if(sf>=599.9 && left>0.01){ if(team){E('Fuel stop',fuel);t+=fuel}else{duty(fuel,'Fuel stop'); if(fuel>=30) sb=0} sf=0; }
+    }
+    var arrT=t; E('Unloading',(+$('h-unload').value||0)*60); t+=(+$('h-unload').value||0)*60;
+    var start=new Date($('h-start').value||Date.now()), at=function(m){return new Date(start.getTime()+m*60000)};
+    var arr=at(arrT), done=at(t), ap=$('h-appt').value, msg='';
+    if(ap){ var diff=(arr-new Date(ap))/60000; msg=diff<=0?'<p style="color:#15803d;font-weight:700">On time. You arrive '+hm(-diff)+' before your appointment.</p>':'<p style="color:#b91c1c;font-weight:700">Late by '+hm(diff)+'. Ask your dispatcher about rescheduling or a team.</p>'; }
+    var bar=ev.map(function(x,i){return '<i title="'+x.k+'" style="width:'+((x.e-x.s)/t*100)+'%;background:'+C[x.k]+';animation-delay:'+(i*40)+'ms"></i>'}).join('');
+    var leg=['Drive','30-min break','Fuel stop','10-hr reset','Loading'].map(function(k){return '<span><b style="background:'+C[k]+'"></b>'+k+'</span>'}).join('');
+    var li=ev.slice(0,80).map(function(x,i){return '<li style="animation-delay:'+Math.min(i*30,600)+'ms"><span class="d" style="background:'+C[x.k]+'"></span><span><b>'+x.k+'</b> <small>'+x.x+'</small><br><small>'+fd(at(x.s))+' → '+fd(at(x.e))+'</small></span><b>'+hm(x.e-x.s)+'</b></li>'}).join('');
+    $('h-out').innerHTML='<div>Estimated arrival</div><div class="big">'+fd(arr)+'</div>'+msg+'<dl><div><dt>Total trip time</dt><dd>'+hm(t)+'</dd></div><div><dt>Driving time</dt><dd>'+hm(dm)+'</dd></div><div><dt>Rest and breaks</dt><dd>'+hm(rest)+'</dd></div><div><dt>Long resets</dt><dd>'+resets+'</dd></div><div><dt>Done unloading</dt><dd>'+fd(done)+'</dd></div></dl><div class="tlbar">'+bar+'</div><div class="tlleg">'+leg+'</div><ul class="tl">'+li+'</ul>';
+  }
+  $('h-go').addEventListener('click',calc);
+})();
+</script>
+<script>
+(function(){
+  var pr=document.getElementById('progress');
+  var tk=0;window.addEventListener('scroll',function(){if(tk)return;tk=requestAnimationFrame(function(){tk=0;var h=document.documentElement;if(pr)pr.style.transform='scaleX('+(h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight))+')'})},{passive:true});
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.section-head,.info-card,.log,.calc-card,.stat,.faq-item,.route-step,.step,.cta-band .wrap').forEach(function(el,i){el.classList.add('rv');el.style.transitionDelay=(i%4)*70+'ms';io.observe(el)});
+})();
+</script>
+<script>
+(function(){
+  var s=document.getElementById('scene');
+  if(!s||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(e){s.classList.toggle('is-paused',!e[0].isIntersecting);},{threshold:0}).observe(s);
+})();
+</script>
+<script>
+  // ---- Contact form
+  var FORM_TO = 'dispatch@appyron.site'; // change this one address to wherever form messages should arrive: builds a pre-filled email to dispatch@appyron.site ----
+  (function(){
+    const form = document.getElementById('contactForm');
+    if(!form) return;
+    const status = document.getElementById('cfStatus');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      // honeypot — bots fill every field, real visitors never see this one
+      if(form.company_website.value){ return; }
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const truck = form.truck.value.trim();
+      const message = form.message.value.trim();
+
+      if(!name || !email || !message){
+        status.textContent = 'Please fill in your name, email, and message.';
+        status.className = 'form-status show error';
+        return;
+      }
+
+      const btn=document.getElementById('cfSubmit'); btn.disabled=true;
+      fetch('https://formsubmit.co/ajax/'+FORM_TO+'',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({_honey:'',_template:'table',_captcha:'false',name:name,email:email,phone:phone,truck_mc:truck,message:message,_subject:'New inquiry from '+name+' — Appyron website',_replyto:email})})
+      .then(function(r){ return r.json().catch(function(){return {}}).then(function(d){ if(!r.ok||d.success===false||d.success==='false') throw 0; status.textContent="Thanks! Your message was sent. A dispatcher will reach out the same day."; status.className='form-status show success'; form.reset(); }); })
+      .catch(function(){ status.textContent='Sorry, that did not send. Please call us at +1 346 786 7777.'; status.className='form-status show error'; })
+      .finally(function(){ btn.disabled=false; });
+    });
+  })();
+
+  // ---- Rate & Cost Per Mile Calculator ----
+  (function(){
+    const resultsEl = document.getElementById('calcResults');
+    if (!resultsEl) return;
+
+    const ids = ['calc-rate','calc-miles','calc-deadhead','calc-mpg','calc-fuel','calc-maint','calc-insurance','calc-truckpay','calc-permits','calc-factoring','calc-dispatch'];
+    const get = (id) => parseFloat(document.getElementById(id).value) || 0;
+
+    const equipSelect = document.getElementById('calc-equip');
+    const mpgInput = document.getElementById('calc-mpg');
+    equipSelect.addEventListener('change', () => { mpgInput.value = equipSelect.value; calculate(); });
+
+    const advToggle = document.getElementById('calcAdvToggle');
+    const advPanel = document.getElementById('calcAdvanced');
+    const advArrow = document.getElementById('calcAdvArrow');
+    advToggle.addEventListener('click', () => {
+      const open = advPanel.classList.toggle('open');
+      advArrow.textContent = open ? '▾' : '▸';
+    });
+
+    function fmt(n){ return '$' + n.toFixed(2); }
+    function fmtMi(n){ return '$' + n.toFixed(2) + '/mi'; }
+
+    function calculate(){
+      const rate = get('calc-rate');
+      const miles = get('calc-miles');
+      const deadhead = get('calc-deadhead');
+      const mpg = get('calc-mpg') || 1;
+      const fuelPrice = get('calc-fuel');
+      const maint = get('calc-maint');
+      const insurance = get('calc-insurance');
+      const truckpay = get('calc-truckpay');
+      const permits = get('calc-permits');
+      const factoringPct = get('calc-factoring');
+      const dispatchPct = get('calc-dispatch');
+
+      const totalMiles = miles + deadhead;
+      const grossRPM = miles > 0 ? rate / miles : 0;
+      const allInRPM = totalMiles > 0 ? rate / totalMiles : 0;
+
+      const fuelCPM = fuelPrice / mpg;
+      document.getElementById('calc-fuel-cpm-display').value = fmtMi(fuelCPM);
+
+      const totalCPM = fuelCPM + maint + insurance + truckpay + permits;
+      document.getElementById('calc-total-cpm-display').textContent = fmtMi(totalCPM);
+
+      const netRPM = allInRPM - totalCPM;
+      const netProfit = netRPM * totalMiles;
+
+      const factoringFee = rate * (factoringPct / 100);
+      const dispatchFee = rate * (dispatchPct / 100);
+      const takeHomeTotal = netProfit - factoringFee - dispatchFee;
+      const takeHomeRPM = totalMiles > 0 ? takeHomeTotal / totalMiles : 0;
+
+      let verdictClass = 'good', verdictText = '✓ Good load';
+      if (netRPM < 0){ verdictClass = 'bad'; verdictText = '✕ Losing money'; }
+      else if (netRPM < 0.35){ verdictClass = 'marginal'; verdictText = '⚠ Marginal load'; }
+
+      const costPct = allInRPM > 0 ? Math.max(0, Math.min(100, (totalCPM / allInRPM) * 100)) : 100;
+      const profitPct = 100 - costPct;
+
+      resultsEl.innerHTML = `
+        <div class="calc-verdict ${verdictClass}">${verdictText}</div>
+
+        <div class="calc-hero-grid">
+          <div class="calc-hero-box">
+            <span class="lbl">Rate per mile</span>
+            <span class="val">${allInRPM.toFixed(2)}</span>
+          </div>
+          <div class="calc-hero-box">
+            <span class="lbl">Cost per mile</span>
+            <span class="val">${totalCPM.toFixed(2)}</span>
+          </div>
+        </div>
+
+        <div class="calc-bar-wrap">
+          <div class="calc-bar">
+            <div class="cost-seg" style="width:${costPct}%"></div>
+            <div class="profit-seg" style="width:${profitPct}%"></div>
+          </div>
+          <div class="calc-bar-legend"><span class="cost">■ Cost ${costPct.toFixed(0)}%</span><span class="profit">■ Profit ${profitPct.toFixed(0)}%</span></div>
+        </div>
+
+        <div class="calc-hero-grid" style="margin-bottom:6px;">
+          <div class="calc-hero-box profit">
+            <span class="lbl">Net profit / mile</span>
+            <span class="val">${netRPM.toFixed(2)}</span>
+          </div>
+          <div class="calc-hero-box profit">
+            <span class="lbl">Net profit, this load</span>
+            <span class="val" style="font-size:20px;">${fmt(netProfit)}</span>
+          </div>
+        </div>
+
+        <div class="calc-stat-row"><span class="lbl">Gross RPM (loaded miles only)</span><span class="val">${fmtMi(grossRPM)}</span></div>
+        <div class="calc-stat-row"><span class="lbl">Total miles (loaded + deadhead)</span><span class="val">${totalMiles}</span></div>
+        ${(factoringPct > 0 || dispatchPct > 0) ? `
+        <div class="calc-stat-row"><span class="lbl">Factoring fee (${factoringPct}%)</span><span class="val">-${fmt(factoringFee)}</span></div>
+        <div class="calc-stat-row"><span class="lbl">Dispatch fee (${dispatchPct}%)</span><span class="val">-${fmt(dispatchFee)}</span></div>
+        <div class="calc-stat-row"><span class="lbl">Take-home, after fees</span><span class="val">${fmt(takeHomeTotal)} (${takeHomeRPM.toFixed(2)}/mi)</span></div>
+        ` : ''}
+      `;
+    }
+
+    ids.forEach(id => document.getElementById(id).addEventListener('input', calculate));
+    calculate();
+  })();
+
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  toggle.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+    toggle.textContent = isOpen ? '✕' : '☰';
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+    toggle.textContent = '☰';
+  }));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Appyron
+> Truck dispatch service for owner-operators and small fleets in the US: load booking, rate negotiation, paperwork, new MC authority support. Contact: +1 346 786 7777, dispatch@appyron.site
+
+## Pages
+- [How Much Do Truck Dispatchers Charge?](https://appyron.site/how-much-do-truck-dispatchers-charge.html): What truck dispatch services typically charge, how percentage and flat-fee pricing compare, a worked example, and red flags to avoid.
+- [Dispatch Service for New MC Authorities](https://appyron.site/dispatch-service-for-new-mc-authority.html): How a truck dispatch service helps a new MC authority find loads, set up brokers and build a rate history.
+- [Dry Van Dispatch Service for Owner-Operators](https://appyron.site/dry-van-dispatch.html): Dry van dispatch for owner-operators: steady freight, backhaul planning, rate negotiation and detention protection.
+- [Reefer Dispatch Service for Temperature-Controlled Freight](https://appyron.site/reefer-dispatch.html): Reefer dispatch for owner-operators: temperature-controlled loads, reefer rates, lumper and detention handling, and compliant paperwork.
+- [Flatbed and Step Deck Dispatch Service](https://appyron.site/flatbed-dispatch.html): Flatbed and step deck dispatch: loads matched to your tarps, straps and permits, with rates that reflect the extra work.
+- [Power-Only Dispatch Service](https://appyron.site/power-only-dispatch.html): Power-only dispatch for tractor owners: drop-and-hook loads, trailer interchange and insurance basics, and faster turns.
